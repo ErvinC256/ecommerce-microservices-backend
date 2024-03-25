@@ -30,4 +30,9 @@ public class OrderController {
 
         return orderService.getOrdersByStatus(userId, placed, delivered, completed);
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "Hello from OrderController!";
+    }
 }

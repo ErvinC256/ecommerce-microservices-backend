@@ -35,7 +35,7 @@ public class PaymentController {
 
     @GetMapping("/test")
     public String test() {
-        return "Hi, from OrderController!";
+        return "Hello from PaymentController!";
     }
 }
 

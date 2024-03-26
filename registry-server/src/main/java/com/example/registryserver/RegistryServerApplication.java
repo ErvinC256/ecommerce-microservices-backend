@@ -13,5 +13,3 @@ public class RegistryServerApplication {
 	}
 
 }
-
-//test commit123

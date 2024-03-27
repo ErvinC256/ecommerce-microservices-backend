@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/payments")
 public class PaymentController {
 

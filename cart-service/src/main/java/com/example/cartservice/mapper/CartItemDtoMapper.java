@@ -8,9 +8,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface CartItemMapper {
+public interface CartItemDtoMapper {
 
-    CartItemMapper INSTANCE = Mappers.getMapper(CartItemMapper.class);
+    CartItemDtoMapper INSTANCE = Mappers.getMapper(CartItemDtoMapper.class);
 
     @Mapping(source = "cartItem.id", target = "cartItemId")
     CartDto.CartItemDto from(CartItem cartItem, ProductDto productDto);

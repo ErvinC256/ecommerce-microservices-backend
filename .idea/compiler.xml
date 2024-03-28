@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
         <module name="inventory-service" />
-        <module name="order-service" />
         <module name="payment-service" />
         <module name="registry-server" />
         <module name="user-service" />
@@ -23,6 +22,7 @@
         </processorPath>
         <module name="product-service" />
         <module name="cart-service" />
+        <module name="order-service" />
       </profile>
     </annotationProcessing>
   </component>

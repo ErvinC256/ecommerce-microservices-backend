@@ -1,5 +1,6 @@
 package com.example.orderservice.controller;
 
+import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.model.Order;
 import com.example.orderservice.service.OrderService;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class OrderController {
     }
 
     @GetMapping("/{orderNumber}")
-    public Order getOrder(@PathVariable String orderNumber) {
+    public OrderDto getOrder(@PathVariable String orderNumber) {
 
         return orderService.getOrder(orderNumber);
     }

@@ -4,13 +4,11 @@ import com.example.cartservice.dto.AddToCartDto;
 import com.example.cartservice.dto.CartDto;
 import com.example.cartservice.dto.CartItemDto;
 import com.example.cartservice.dto.ProductDto;
-import com.example.cartservice.mapper.CartItemMapper;
+import com.example.cartservice.mapper.CartItemDtoMapper;
 import com.example.cartservice.model.Cart;
 import com.example.cartservice.model.CartItem;
 import com.example.cartservice.repository.CartItemRepository;
 import com.example.cartservice.repository.CartRepository;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -66,7 +64,7 @@ public class CartService {
             CartItem cartItem = cartItems.get(i);
             ProductDto productDto = productDtos.get(i);
 
-            CartDto.CartItemDto cartItemDto = CartItemMapper.INSTANCE.from(cartItem, productDto);
+            CartDto.CartItemDto cartItemDto = CartItemDtoMapper.INSTANCE.from(cartItem, productDto);
 
             cartDto.getCartItemDtos().add(cartItemDto);
         }

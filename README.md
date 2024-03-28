@@ -12,10 +12,9 @@
 ---
 
 ### Main Features:
-1. Browse Products
-2. Place Order
-3. Manage Account
-4. Track Orders
-5. Manage Inventory
-
+1. Enhanced Product Search
+2. Order Placement & Payment
+3. Account Management
+4. Order Handling
+5. Inventory Management
 

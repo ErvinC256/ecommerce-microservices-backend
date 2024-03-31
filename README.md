@@ -1,6 +1,5 @@
 # ecommerce-microservices-backend
 
-#### **under development **event-driven architecture
 ---
 
 <img src="https://github.com/ErvinC256/ecommerce-microservices-backend/assets/149756489/31b77ae6-bcc7-497c-a0fd-a765616cb05a" width="75%">

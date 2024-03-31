@@ -1,9 +1,6 @@
 package com.example.cartservice.service;
 
-import com.example.cartservice.dto.AddToCartDto;
-import com.example.cartservice.dto.CartDto;
-import com.example.cartservice.dto.CartItemDto;
-import com.example.cartservice.dto.ProductDto;
+import com.example.cartservice.dto.*;
 import com.example.cartservice.mapper.CartItemDtoMapper;
 import com.example.cartservice.model.Cart;
 import com.example.cartservice.model.CartItem;
@@ -107,6 +104,44 @@ public class CartService {
         cartRepository.save(cart); //cascade
 
         return cartItem;
+    }
+
+    public List<Long> addCartItems(Long userId, ReorderDto reorderDto) {
+
+        Cart cart = checkIfCartExist(userId);
+
+        reorderDto.getReorderItems().forEach(reorderItem -> {
+            CartItem cartItem = new CartItem();
+            cartItem.setQuantity(reorderItem.getQuantity());
+            cartItem.setProductId(reorderItem.getProductId());
+            cartItem.setCart(cart);
+
+            cart.getCartItems().add(cartItem);
+        });
+
+        //update existing cart
+        cart.setLastUpdated(LocalDateTime.now());
+        cartRepository.save(cart); //cascade
+
+        //retrieve cart again
+        Cart retrievedCart = cartRepository.findByUserId(userId);
+        List<Long> cartItemIds = new ArrayList<>();
+
+        retrievedCart.getCartItems().forEach(cartItem -> {
+            cartItemIds.add(cartItem.getId());
+        });
+
+        Collections.sort(cartItemIds, Collections.reverseOrder());
+
+        //fetch cart item ids created from bulk
+        int numReorderItems = reorderDto.getReorderItems().size();
+        List<Long> newCartItemIds = new ArrayList<>();
+
+        for (int i = 0; i < numReorderItems; i++) {
+            newCartItemIds.add(cartItemIds.get(i));
+        }
+
+        return newCartItemIds;
     }
 
     public void updateCartItem(Long userId, Long cartItemId, Long newQuantity) {

@@ -66,10 +66,19 @@ public class OrderDto {
 
     public static class OrderItemDto {
         private Long quantityPurchased;
+        private String productId;
 
         // from product service
         private String productName;
         private BigDecimal productPrice;
+
+        public String getProductId() {
+            return productId;
+        }
+
+        public void setProductId(String productId) {
+            this.productId = productId;
+        }
 
         public Long getQuantityPurchased() {
             return quantityPurchased;

@@ -3,6 +3,7 @@ package com.example.cartservice.controller;
 import com.example.cartservice.dto.AddToCartDto;
 import com.example.cartservice.dto.CartDto;
 import com.example.cartservice.dto.CartItemDto;
+import com.example.cartservice.dto.ReorderDto;
 import com.example.cartservice.model.CartItem;
 import com.example.cartservice.service.CartService;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,15 @@ public class CartController {
         CartItem cartItem = cartService.addCartItem(userId, addToCartDto);
 
         return new ResponseEntity<>(cartItem, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/{userId}/cart-items/bulk")
+    public ResponseEntity<List<Long>> addCartItems(@PathVariable Long userId,
+                                                    @RequestBody ReorderDto reorderDto) {
+
+        List<Long> cartItemIds = cartService.addCartItems(userId, reorderDto);
+
+        return new ResponseEntity<>(cartItemIds, HttpStatus.CREATED);
     }
 
     @PutMapping("/{userId}/cart-items/{cartItemId}")

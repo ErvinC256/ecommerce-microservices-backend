@@ -3,18 +3,18 @@ package com.example.paymentservice.dto;
 import java.io.Serializable;
 
 //between payment and frontend
-public class ProcessedPayment implements Serializable {
+public class ProcessedPaymentDto implements Serializable {
 
     private String paypalStatus;
     private String paypalOrderId;
     private String redirectUrl;
 
     // for paypal service
-    public ProcessedPayment(String paypalStatus) {
+    public ProcessedPaymentDto(String paypalStatus) {
         this.paypalStatus = paypalStatus;
     }
 
-    public ProcessedPayment(String paypalStatus, String paypalOrderId, String redirectUrl) {
+    public ProcessedPaymentDto(String paypalStatus, String paypalOrderId, String redirectUrl) {
         this.paypalStatus = paypalStatus;
         this.paypalOrderId = paypalOrderId;
         this.redirectUrl = redirectUrl;

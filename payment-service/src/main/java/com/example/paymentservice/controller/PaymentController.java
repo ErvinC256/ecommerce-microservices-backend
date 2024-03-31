@@ -1,7 +1,7 @@
 package com.example.paymentservice.controller;
 
-import com.example.paymentservice.dto.CompletedPayment;
-import com.example.paymentservice.dto.ProcessedPayment;
+import com.example.paymentservice.dto.CompletedPaymentDto;
+import com.example.paymentservice.dto.ProcessedPaymentDto;
 import com.example.paymentservice.service.PaypalService;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,16 +19,16 @@ public class PaymentController {
     }
 
     @PostMapping("/init")
-    public ProcessedPayment createPayment(@RequestParam BigDecimal amount) {
+    public ProcessedPaymentDto createPayment(@RequestParam BigDecimal amount) {
 
         return paypalService.createPayment(amount);
     }
 
     @PostMapping("/capture")
-    public CompletedPayment capturePayment(@RequestParam String paypalOrderId,
-                                           @RequestParam Long userId,
-                                           @RequestParam BigDecimal amount,
-                                           @RequestParam List<Long> cartItemIds) {
+    public CompletedPaymentDto capturePayment(@RequestParam String paypalOrderId,
+                                              @RequestParam Long userId,
+                                              @RequestParam BigDecimal amount,
+                                              @RequestParam List<Long> cartItemIds) {
 
         return paypalService.capturePayment(paypalOrderId, userId, amount, cartItemIds);
     }

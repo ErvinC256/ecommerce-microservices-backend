@@ -1,7 +1,7 @@
 package com.example.paymentservice.service;
 
-import com.example.paymentservice.dto.CompletedPayment;
-import com.example.paymentservice.dto.ProcessedPayment;
+import com.example.paymentservice.dto.CompletedPaymentDto;
+import com.example.paymentservice.dto.ProcessedPaymentDto;
 import com.example.paymentservice.publisher.PaymentEventsPublisher;
 import com.paypal.core.PayPalHttpClient;
 import com.paypal.http.HttpResponse;
@@ -25,7 +25,7 @@ public class PaypalService {
         this.paymentEventsPublisher = paymentEventsPublisher;
     }
 
-    public ProcessedPayment createPayment(BigDecimal amount) {
+    public ProcessedPaymentDto createPayment(BigDecimal amount) {
         OrderRequest orderRequest = new OrderRequest();
         orderRequest.checkoutPaymentIntent("CAPTURE");
         AmountWithBreakdown amountBreakdown = new AmountWithBreakdown().currencyCode("MYR").value(amount.toString());
@@ -47,36 +47,36 @@ public class PaypalService {
                     .orElseThrow(NoSuchElementException::new)
                     .href();
 
-            return new ProcessedPayment("success",  order.id(), redirectUrl);
+            return new ProcessedPaymentDto("success",  order.id(), redirectUrl);
         } catch (IOException e) {
 
-            return new ProcessedPayment("Error");
+            return new ProcessedPaymentDto("Error");
         }
     }
 
-    public CompletedPayment capturePayment(String paypalOrderId, Long userId, BigDecimal amount, List<Long> cartItemIds) {
+    public CompletedPaymentDto capturePayment(String paypalOrderId, Long userId, BigDecimal amount, List<Long> cartItemIds) {
         OrdersCaptureRequest ordersCaptureRequest = new OrdersCaptureRequest(paypalOrderId);
 
-        CompletedPayment completedPayment = new CompletedPayment();
+        CompletedPaymentDto completedPaymentDto = new CompletedPaymentDto();
 
         try {
             HttpResponse<Order> httpResponse = payPalHttpClient.execute(ordersCaptureRequest);
             if (httpResponse.result().status() != null) {
-                completedPayment.setPaypalStatus("success");
-                completedPayment.setPaypalOrderId(paypalOrderId);
+                completedPaymentDto.setPaypalStatus("success");
+                completedPaymentDto.setPaypalOrderId(paypalOrderId);
             }
         } catch (IOException e) {
 
-            completedPayment.setPaypalStatus("error");
+            completedPaymentDto.setPaypalStatus("error");
         }
 
         String orderNumber = UUID.randomUUID().toString();
-        completedPayment.setOrderNumber(orderNumber);
+        completedPaymentDto.setOrderNumber(orderNumber);
 
         // publish event
         paymentEventsPublisher.publishPaymentCompletedEvent(orderNumber, paypalOrderId, userId, amount, cartItemIds);
 
-        return completedPayment;
+        return completedPaymentDto;
     }
 
 }

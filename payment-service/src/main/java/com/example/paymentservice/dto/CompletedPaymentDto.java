@@ -5,7 +5,7 @@ public class CompletedPaymentDto {
 
     private String paypalStatus;
     private String paypalOrderId;
-    private String orderNumber;
+    private Long orderId;
 
     public String getPaypalStatus() {
         return paypalStatus;
@@ -23,12 +23,12 @@ public class CompletedPaymentDto {
         this.paypalOrderId = paypalOrderId;
     }
 
-    public String getOrderNumber() {
-        return orderNumber;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 }
 

@@ -1,34 +1,15 @@
-package com.example.orderservice.message;
+package com.example.orderservice.dto;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-//between payment and order
-public class InitOrderDetails implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private String orderNumber;
-    private String paymentNumber;
+//between frontend and order
+public class InitOrderDetailsDto {
+
     private Long userId;
     private BigDecimal amount;
     private List<Long> cartItemIds = new ArrayList<>();
-
-    public String getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-    public String getPaymentNumber() {
-        return paymentNumber;
-    }
-
-    public void setPaymentNumber(String paymentNumber) {
-        this.paymentNumber = paymentNumber;
-    }
 
     public Long getUserId() {
         return userId;
@@ -54,6 +35,7 @@ public class InitOrderDetails implements Serializable {
         this.cartItemIds = cartItemIds;
     }
 }
+
 
 
 

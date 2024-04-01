@@ -1,6 +1,8 @@
 package com.example.paymentservice.service;
 
 import com.example.paymentservice.dto.CompletedPaymentDto;
+import com.example.paymentservice.dto.OrderDetailsDto;
+import com.example.paymentservice.message.CompleteOrderDetails;
 import com.example.paymentservice.dto.ProcessedPaymentDto;
 import com.example.paymentservice.publisher.PaymentEventsPublisher;
 import com.paypal.core.PayPalHttpClient;
@@ -12,7 +14,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.UUID;
 
 @Service
 public class PaypalService {
@@ -54,7 +55,7 @@ public class PaypalService {
         }
     }
 
-    public CompletedPaymentDto capturePayment(String paypalOrderId, Long userId, BigDecimal amount, List<Long> cartItemIds) {
+    public CompletedPaymentDto capturePayment(String paypalOrderId, OrderDetailsDto orderDetailsDto) {
         OrdersCaptureRequest ordersCaptureRequest = new OrdersCaptureRequest(paypalOrderId);
 
         CompletedPaymentDto completedPaymentDto = new CompletedPaymentDto();
@@ -70,11 +71,10 @@ public class PaypalService {
             completedPaymentDto.setPaypalStatus("error");
         }
 
-        String orderNumber = UUID.randomUUID().toString();
-        completedPaymentDto.setOrderNumber(orderNumber);
+        completedPaymentDto.setOrderId(orderDetailsDto.getOrderId());
 
         // publish event
-        paymentEventsPublisher.publishPaymentCompletedEvent(orderNumber, paypalOrderId, userId, amount, cartItemIds);
+        paymentEventsPublisher.publishPaymentCompletedEvent(paypalOrderId, orderDetailsDto);
 
         return completedPaymentDto;
     }

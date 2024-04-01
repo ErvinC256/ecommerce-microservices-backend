@@ -1,5 +1,6 @@
 package com.example.orderservice.controller;
 
+import com.example.orderservice.dto.InitOrderDetailsDto;
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.model.Order;
 import com.example.orderservice.service.OrderService;
@@ -17,10 +18,10 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/{orderNumber}")
-    public OrderDto getOrder(@PathVariable String orderNumber) {
+    @GetMapping("/{id}")
+    public OrderDto getOrder(@PathVariable Long id) {
 
-        return orderService.getOrder(orderNumber);
+        return orderService.getOrder(id);
     }
 
     @GetMapping("/by-status")
@@ -30,6 +31,12 @@ public class OrderController {
                                          @RequestParam(defaultValue = "false") boolean completed) {
 
         return orderService.getOrdersByStatus(userId, placed, delivered, completed);
+    }
+
+    @PostMapping("")
+    public Long createOrder(@RequestBody InitOrderDetailsDto initOrderDetailsDto) {
+
+        return orderService.createOrder(initOrderDetailsDto);
     }
 
     @GetMapping("/test")

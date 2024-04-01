@@ -1,25 +1,23 @@
 package com.example.paymentservice.message;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-//between payment and order
-public class InitOrderDetails implements Serializable {
+//payment and order
+public class CompleteOrderDetails implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String orderNumber;
+    private Long orderId;
     private String paymentNumber;
     private Long userId;
-    private BigDecimal amount;
     private List<Long> cartItemIds = new ArrayList<>();
 
-    public String getOrderNumber() {
-        return orderNumber;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public String getPaymentNumber() {
@@ -36,14 +34,6 @@ public class InitOrderDetails implements Serializable {
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
     }
 
     public List<Long> getCartItemIds() {

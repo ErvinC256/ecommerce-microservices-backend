@@ -1,12 +1,13 @@
 package com.example.paymentservice.controller;
 
 import com.example.paymentservice.dto.CompletedPaymentDto;
+import com.example.paymentservice.dto.OrderDetailsDto;
+import com.example.paymentservice.message.CompleteOrderDetails;
 import com.example.paymentservice.dto.ProcessedPaymentDto;
 import com.example.paymentservice.service.PaypalService;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @RestController
 @RequestMapping("/payments")
@@ -26,11 +27,9 @@ public class PaymentController {
 
     @PostMapping("/capture")
     public CompletedPaymentDto capturePayment(@RequestParam String paypalOrderId,
-                                              @RequestParam Long userId,
-                                              @RequestParam BigDecimal amount,
-                                              @RequestParam List<Long> cartItemIds) {
+                                              @RequestBody OrderDetailsDto orderDetailsDto) {
 
-        return paypalService.capturePayment(paypalOrderId, userId, amount, cartItemIds);
+        return paypalService.capturePayment(paypalOrderId, orderDetailsDto);
     }
 
     @GetMapping("/test")

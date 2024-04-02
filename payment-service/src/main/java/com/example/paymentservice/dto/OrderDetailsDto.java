@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-//frontend and payment
+//frontend to payment
 public class OrderDetailsDto implements Serializable {
 
     private Long orderId;

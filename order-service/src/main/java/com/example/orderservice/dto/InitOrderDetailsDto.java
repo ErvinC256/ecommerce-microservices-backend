@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-//between frontend and order
+//frontend to order
 public class InitOrderDetailsDto {
 
     private Long userId;

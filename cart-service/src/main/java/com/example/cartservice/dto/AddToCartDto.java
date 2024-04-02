@@ -1,6 +1,6 @@
 package com.example.cartservice.dto;
 
-//between frontend(sender) and cart
+//frontend to cart
 public class AddToCartDto {
 
     private Long productId;

@@ -3,7 +3,7 @@ package com.example.cartservice.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-//between order and cart
+//order to cart
 public class ReorderDto {
 
     private List<ReorderItem> reorderItems = new ArrayList<>();

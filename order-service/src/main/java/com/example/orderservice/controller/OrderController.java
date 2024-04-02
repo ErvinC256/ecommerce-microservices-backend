@@ -26,11 +26,11 @@ public class OrderController {
 
     @GetMapping("/by-status")
     public List<Order> getOrdersByStatus(@RequestParam Long userId,
-                                         @RequestParam(defaultValue = "false") boolean placed,
+                                         @RequestParam(defaultValue = "false") boolean pending,
                                          @RequestParam(defaultValue = "false") boolean delivered,
                                          @RequestParam(defaultValue = "false") boolean completed) {
 
-        return orderService.getOrdersByStatus(userId, placed, delivered, completed);
+        return orderService.getOrdersByStatus(userId, pending, delivered, completed);
     }
 
     @PostMapping("")

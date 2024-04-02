@@ -1,6 +1,6 @@
 package com.example.inventoryservice.dto;
 
-//between inventory and frontend
+//inventory to frontend
 public class InventoryDto {
 
     private Long quantityInStock;

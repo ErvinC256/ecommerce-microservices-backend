@@ -4,6 +4,7 @@ import com.example.orderservice.config.RabbitMQConfig;
 import com.example.orderservice.dto.CartItemDto;
 import com.example.orderservice.message.CartItemsLog;
 import com.example.orderservice.message.ProductQuantitiesLog;
+import com.example.orderservice.model.OrderItem;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
@@ -26,14 +27,14 @@ public class OrderEventsPublisher {
         rabbitTemplate.convertAndSend(RabbitMQConfig.ORDER_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_REMOVE_CART_ITEMS, cartItemsLog);
     }
 
-    public void publishOrderCreatedEventForInventory(List<CartItemDto> cartItemDtos) {
+    public void publishOrderCreatedEventForInventory(List<OrderItem> orderItems) {
 
         ProductQuantitiesLog productQuantitiesLog = new ProductQuantitiesLog();
 
-        cartItemDtos.forEach(cartItemDto -> {
+        orderItems.forEach(orderItem -> {
             ProductQuantitiesLog.ProductQuantity productQuantity = new ProductQuantitiesLog.ProductQuantity();
-            productQuantity.setProductId(cartItemDto.getProductId());
-            productQuantity.setPurchasedQuantity(cartItemDto.getQuantity());
+            productQuantity.setProductId(orderItem.getProductId());
+            productQuantity.setPurchasedQuantity(orderItem.getQuantityPurchased());
 
             productQuantitiesLog.getProductQuantities().add(productQuantity);
         });

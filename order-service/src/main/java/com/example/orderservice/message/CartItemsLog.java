@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-//between order and cart
+//order to cart
 public class CartItemsLog implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long UserId;

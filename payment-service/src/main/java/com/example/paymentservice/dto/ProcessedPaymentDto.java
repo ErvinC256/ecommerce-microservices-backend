@@ -2,7 +2,7 @@ package com.example.paymentservice.dto;
 
 import java.io.Serializable;
 
-//between payment and frontend
+//payment to frontend
 public class ProcessedPaymentDto implements Serializable {
 
     private String paypalStatus;

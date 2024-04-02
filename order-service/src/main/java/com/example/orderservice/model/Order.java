@@ -96,7 +96,7 @@ public class Order {
     }
 
     public static enum Status {
-        PLACED,
+        PENDING,
         DELIVERED,
         COMPLETED
     }

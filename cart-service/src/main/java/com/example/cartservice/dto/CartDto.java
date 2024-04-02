@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//between cart service and frontend
+//cart to frontend
 public class CartDto {
 
     private List<CartItemDto> cartItemDtos = new ArrayList<>();

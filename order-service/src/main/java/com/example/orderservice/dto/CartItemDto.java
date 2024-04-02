@@ -1,6 +1,6 @@
 package com.example.orderservice.dto;
 
-//between cart and order
+//cart to order
 public class CartItemDto {
 
     private Long cartItemId;

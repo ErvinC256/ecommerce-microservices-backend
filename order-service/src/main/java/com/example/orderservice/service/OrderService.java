@@ -84,12 +84,12 @@ public class OrderService {
         return orderDto;
     }
 
-    public List<Order> getOrdersByStatus(Long userId, boolean placed, boolean delivered, boolean completed) {
+    public List<Order> getOrdersByStatus(Long userId, boolean pending, boolean delivered, boolean completed) {
 
         String status;
 
-        if (placed) {
-            status = "PLACED";
+        if (pending) {
+            status = "PENDING";
         } else if (delivered) {
             status = "DELIVERED";
         } else {
@@ -106,7 +106,7 @@ public class OrderService {
         order.setUserId(initOrderDetailsDto.getUserId());
         order.setTotalAmount(initOrderDetailsDto.getAmount());
         order.setDateCreated(LocalDateTime.now());
-        order.setStatus(Order.Status.PLACED);
+        order.setStatus(Order.Status.PENDING);
 
         List<Long> cartItemIds = initOrderDetailsDto.getCartItemIds();
 

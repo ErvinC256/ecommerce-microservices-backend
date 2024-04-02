@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-//between order and inventory
+//order to inventory
 public class ProductQuantitiesLog implements Serializable {
     private static final long serialVersionUID = 1L;
     private List<ProductQuantity> productQuantities = new ArrayList<>();

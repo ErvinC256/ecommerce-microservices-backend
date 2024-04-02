@@ -111,12 +111,9 @@ public class CartService {
         Cart cart = checkIfCartExist(userId);
 
         reorderDto.getReorderItems().forEach(reorderItem -> {
-            CartItem cartItem = new CartItem();
-            cartItem.setQuantity(reorderItem.getQuantity());
-            cartItem.setProductId(reorderItem.getProductId());
-            cartItem.setCart(cart);
 
-            cart.getCartItems().add(cartItem);
+
+
         });
 
         //update existing cart

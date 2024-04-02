@@ -2,7 +2,7 @@ package com.example.cartservice.dto;
 
 import java.math.BigDecimal;
 
-//between product service and cart service
+//product to cart
 public class ProductDto {
 
     private String productName;

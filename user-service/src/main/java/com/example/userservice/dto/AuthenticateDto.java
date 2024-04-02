@@ -1,6 +1,6 @@
 package com.example.userservice.dto;
 
-//between user and frontend
+//frontend to user
 public class AuthenticateDto {
 
     private String email;

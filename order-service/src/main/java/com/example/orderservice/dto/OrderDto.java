@@ -1,12 +1,11 @@
 package com.example.orderservice.dto;
 
-import com.example.orderservice.model.OrderItem;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+//order to frontend
 public class OrderDto {
 
     private String orderNumber;

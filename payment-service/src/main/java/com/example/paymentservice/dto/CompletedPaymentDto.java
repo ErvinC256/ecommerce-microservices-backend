@@ -1,6 +1,6 @@
 package com.example.paymentservice.dto;
 
-//between payment and frontend
+//payment to frontend
 public class CompletedPaymentDto {
 
     private String paypalStatus;

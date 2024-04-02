@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-//payment and order
+//payment to order
 public class CompleteOrderDetails implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long orderId;

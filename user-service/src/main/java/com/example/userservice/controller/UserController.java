@@ -30,9 +30,10 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody RegisterDto request) {
+    public ResponseEntity<User> register(@RequestBody RegisterDto request) {
 
-        return userService.register(request);
+        User user = userService.register(request);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @PostMapping("/authenticate")

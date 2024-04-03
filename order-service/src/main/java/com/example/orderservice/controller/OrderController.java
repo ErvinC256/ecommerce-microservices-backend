@@ -4,6 +4,8 @@ import com.example.orderservice.dto.InitOrderDetailsDto;
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.model.Order;
 import com.example.orderservice.service.OrderService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,10 +35,11 @@ public class OrderController {
         return orderService.getOrdersByStatus(userId, pending, delivered, completed);
     }
 
-    @PostMapping("")
-    public Long createOrder(@RequestBody InitOrderDetailsDto initOrderDetailsDto) {
+    @PostMapping("/init")
+    public ResponseEntity<Long> createOrder(@RequestBody InitOrderDetailsDto initOrderDetailsDto) {
 
-        return orderService.createOrder(initOrderDetailsDto);
+        Long orderId = orderService.createOrder(initOrderDetailsDto);
+        return new ResponseEntity<>(orderId, HttpStatus.CREATED);
     }
 
     @GetMapping("/test")

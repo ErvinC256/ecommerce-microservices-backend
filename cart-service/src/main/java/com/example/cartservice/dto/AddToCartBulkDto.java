@@ -3,20 +3,20 @@ package com.example.cartservice.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-//order to cart
-public class ReorderDto {
+//frontend to cart
+public class AddToCartBulkDto {
 
-    private List<ReorderItem> reorderItems = new ArrayList<>();
+    private List<AddToCartBulkItem> addToCartBulkItems = new ArrayList<>();
 
-    public List<ReorderItem> getReorderItems() {
-        return reorderItems;
+    public List<AddToCartBulkItem> getAddToCartBulkItems() {
+        return addToCartBulkItems;
     }
 
-    public void setReorderItems(List<ReorderItem> reorderItems) {
-        this.reorderItems = reorderItems;
+    public void setAddToCartBulkItems(List<AddToCartBulkItem> addToCartBulkItems) {
+        this.addToCartBulkItems = addToCartBulkItems;
     }
 
-    public static class ReorderItem {
+    public static class AddToCartBulkItem {
         private Long productId;
         private Long quantity;
 

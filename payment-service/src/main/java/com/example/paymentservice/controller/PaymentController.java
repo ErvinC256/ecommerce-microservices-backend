@@ -5,6 +5,8 @@ import com.example.paymentservice.dto.OrderDetailsDto;
 import com.example.paymentservice.message.CompleteOrderDetails;
 import com.example.paymentservice.dto.ProcessedPaymentDto;
 import com.example.paymentservice.service.PaypalService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -20,9 +22,10 @@ public class PaymentController {
     }
 
     @PostMapping("/init")
-    public ProcessedPaymentDto createPayment(@RequestParam BigDecimal amount) {
+    public ResponseEntity<ProcessedPaymentDto> createPayment(@RequestParam BigDecimal amount) {
 
-        return paypalService.createPayment(amount);
+        ProcessedPaymentDto processedPaymentDto = paypalService.createPayment(amount);
+        return new ResponseEntity<>(processedPaymentDto, HttpStatus.CREATED);
     }
 
     @PostMapping("/capture")

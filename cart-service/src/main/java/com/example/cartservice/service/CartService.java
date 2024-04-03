@@ -106,14 +106,17 @@ public class CartService {
         return cartItem;
     }
 
-    public List<Long> addCartItems(Long userId, ReorderDto reorderDto) {
+    public List<Long> addCartItems(Long userId, AddToCartBulkDto addToCartBulkDto) {
 
         Cart cart = checkIfCartExist(userId);
 
-        reorderDto.getReorderItems().forEach(reorderItem -> {
+        addToCartBulkDto.getAddToCartBulkItems().forEach(addToCartBulkItem -> {
+            CartItem cartItem = new CartItem();
+            cartItem.setProductId(addToCartBulkItem.getProductId());
+            cartItem.setQuantity(addToCartBulkItem.getQuantity());
+            cartItem.setCart(cart);
 
-
-
+            cart.getCartItems().add(cartItem);
         });
 
         //update existing cart
@@ -131,7 +134,7 @@ public class CartService {
         Collections.sort(cartItemIds, Collections.reverseOrder());
 
         //fetch cart item ids created from bulk
-        int numReorderItems = reorderDto.getReorderItems().size();
+        int numReorderItems = addToCartBulkDto.getAddToCartBulkItems().size();
         List<Long> newCartItemIds = new ArrayList<>();
 
         for (int i = 0; i < numReorderItems; i++) {

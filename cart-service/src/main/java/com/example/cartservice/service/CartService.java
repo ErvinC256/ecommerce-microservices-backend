@@ -84,11 +84,11 @@ public class CartService {
         cartItem.setQuantity(addToCartDto.getQuantity());
 
         //update existing cart
-        cart.getCartItems().add(cartItem);
         cart.setLastUpdated(LocalDateTime.now());
-        cartRepository.save(cart); //cascade
+        cartRepository.save(cart); //save cart separately to avoid cascade
 
-        return cartItem;
+        //save and retrieve for id
+        return cartItemRepository.save(cartItem);
     }
 
     public List<Long> addCartItems(Long userId, AddToCartBulkDto addToCartBulkDto) {

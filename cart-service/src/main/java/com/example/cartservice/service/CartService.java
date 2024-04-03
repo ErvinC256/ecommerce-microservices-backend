@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -35,24 +36,8 @@ public class CartService {
         Cart cart = checkIfCartExist(userId);
         List<CartItem> cartItems = cart.getCartItems();
 
-        // Build product ids string
-        List<Long> productIds = new ArrayList<>();
-        for (CartItem cartItem : cartItems) {
-            productIds.add(cartItem.getProductId());
-        }
-
-        StringBuilder productIdsString = new StringBuilder();
-        for (int i = 0; i < productIds.size(); i++) {
-            productIdsString.append(productIds.get(i));
-            if (i < productIds.size() - 1) {
-                productIdsString.append(",");
-            }
-        }
-
         // fetch products
-        String productUrl = "http://product-service/products/by-ids?ids=" + productIdsString;
-        ResponseEntity<List<ProductDto>> productResponse = restTemplate.exchange(productUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductDto>>() {});
-        List<ProductDto> productDtos = productResponse.getBody();
+        List<ProductDto> productDtos = fetchProductsFromCartItems(cartItems);
 
         // Construct response using list of cart items, products
         CartDto cartDto = new CartDto();
@@ -146,20 +131,24 @@ public class CartService {
 
     public void updateCartItem(Long userId, Long cartItemId, Long newQuantity) {
 
+        System.out.println("here!1" + cartItemId);
         Cart cart = checkIfCartExist(userId);
 
         Optional<CartItem> cartItemOptional = cartItemRepository.findById(cartItemId);
 
-        if (cartItemOptional.isPresent()) {
+        if (!cartItemOptional.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cart item not found for id " + cartItemId);
         }
 
+        System.out.println("here!2");
         CartItem cartItem = cartItemOptional.get();
         cartItem.setQuantity(newQuantity);
         cartItemRepository.save(cartItem);
 
         cart.setLastUpdated(LocalDateTime.now());
         cartRepository.save(cart);
+
+        System.out.println("here!3");
     }
 
     public void removeCartItem(Long userId, Long cartItemId) {
@@ -192,6 +181,50 @@ public class CartService {
         Long cartItemsCount = (long) cartItems.size();
 
         return cartItemsCount;
+    }
+
+    public BigDecimal calculateSelectedCartItemsAmount(Long userId, List<Long> selectedCartItemIds) {
+        checkIfCartExist(userId);
+
+        List<CartItem> selectedCartItems = cartItemRepository.findAllById(selectedCartItemIds);
+
+        // fetch products
+        List<ProductDto> productDtos = fetchProductsFromCartItems(selectedCartItems);
+
+        BigDecimal selectedCartItemsAmount = BigDecimal.ZERO;
+
+        for (int i = 0; i < selectedCartItems.size(); i++) {
+
+            Long quantity = selectedCartItems.get(i).getQuantity();
+            BigDecimal unitPrice = productDtos.get(i).getProductPrice();
+
+            BigDecimal totalPriceForItem = unitPrice.multiply(BigDecimal.valueOf(quantity));
+            selectedCartItemsAmount = selectedCartItemsAmount.add(totalPriceForItem);
+        }
+
+        return selectedCartItemsAmount;
+    }
+
+    private List<ProductDto> fetchProductsFromCartItems(List<CartItem> cartItems) {
+
+        List<Long> productIds = new ArrayList<>();
+        for (CartItem cartItem : cartItems) {
+            productIds.add(cartItem.getProductId());
+        }
+
+        StringBuilder productIdsString = new StringBuilder();
+        for (int i = 0; i < productIds.size(); i++) {
+            productIdsString.append(productIds.get(i));
+            if (i < productIds.size() - 1) {
+                productIdsString.append(",");
+            }
+        }
+
+        // fetch products
+        String productUrl = "http://product-service/products/by-ids?ids=" + productIdsString;
+        ResponseEntity<List<ProductDto>> productResponse = restTemplate.exchange(productUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductDto>>() {});
+
+        return productResponse.getBody();
     }
 
     private Cart checkIfCartExist(Long userId) {

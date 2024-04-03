@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -76,6 +77,12 @@ public class CartController {
     public Long countCartItems(@PathVariable Long userId) {
 
         return cartService.countCartItems(userId);
+    }
+
+    @GetMapping("/{userId}/cart-items/selected-amount")
+    public BigDecimal calculateSelectedCartItemsAmount(@PathVariable Long userId,
+                                                 @RequestParam List<Long> selectedCartItemIds) {
+        return cartService.calculateSelectedCartItemsAmount(userId, selectedCartItemIds);
     }
 
     //test

@@ -1,5 +1,5 @@
-INSERT INTO orders (order_number, payment_number, date_created, total_amount, status, user_id) VALUES ('30b8da52-c5f1-4f6c-9099-86a1ff465d27', '8HU03993WS431134J', TO_TIMESTAMP('2024-01-15 08:30:00', 'YYYY-MM-DD HH24:MI:SS'), 27737.02, 'PENDING', 2);
-INSERT INTO orders (order_number, payment_number, date_created, total_amount, status, user_id) VALUES ('6f736a6b-9e35-4743-b10e-8b6237f657bc', '1HDU40393WS43114J', TO_TIMESTAMP('2024-02-05 10:45:00', 'YYYY-MM-DD HH24:MI:SS'), 29392.6, 'PENDING', 2);
+INSERT INTO orders (order_number, payment_number, date_created, total_amount, status, user_id) VALUES ('30b8da52-c5f1-4f6c-9099-86a1ff465d27', '8HU03993WS431134J', TO_TIMESTAMP('2024-01-15 08:30:00', 'YYYY-MM-DD HH24:MI:SS'), 27737.02, 'PLACED', 2);
+INSERT INTO orders (order_number, payment_number, date_created, total_amount, status, user_id) VALUES ('6f736a6b-9e35-4743-b10e-8b6237f657bc', '1HDU40393WS43114J', TO_TIMESTAMP('2024-02-05 10:45:00', 'YYYY-MM-DD HH24:MI:SS'), 29392.6, 'PLACED', 2);
 
 INSERT INTO orders (order_number, payment_number, date_created, total_amount, status, user_id) VALUES ('ab53c880-79b5-4f6b-bf9d-12a7b765c709', '3YU03993WS431134J', TO_TIMESTAMP('2024-01-15 08:30:00', 'YYYY-MM-DD HH24:MI:SS'), 754.88, 'DELIVERED', 2);
 

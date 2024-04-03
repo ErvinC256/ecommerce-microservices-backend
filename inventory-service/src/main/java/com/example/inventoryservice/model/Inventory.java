@@ -16,6 +16,8 @@ public class Inventory {
 
     private Long quantityInStock;
 
+    private Long minimumStock;
+
     private LocalDateTime lastUpdated;
 
     private Long productId;
@@ -34,6 +36,14 @@ public class Inventory {
 
     public void setQuantityInStock(Long quantityInStock) {
         this.quantityInStock = quantityInStock;
+    }
+
+    public Long getMinimumStock() {
+        return minimumStock;
+    }
+
+    public void setMinimumStock(Long minimumStock) {
+        this.minimumStock = minimumStock;
     }
 
     public LocalDateTime getLastUpdated() {

@@ -10,7 +10,6 @@ import com.example.orderservice.repository.OrderRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,13 +19,11 @@ public class PaymentEventsListener {
 
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
-    private final RestTemplate restTemplate;
     private final OrderEventsPublisher orderEventsPublisher;
 
-    public PaymentEventsListener(OrderRepository orderRepository, OrderItemRepository orderItemRepository, RestTemplate restTemplate, OrderEventsPublisher orderEventsPublisher) {
+    public PaymentEventsListener(OrderRepository orderRepository, OrderItemRepository orderItemRepository, OrderEventsPublisher orderEventsPublisher) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
-        this.restTemplate = restTemplate;
         this.orderEventsPublisher = orderEventsPublisher;
     }
 
@@ -42,7 +39,7 @@ public class PaymentEventsListener {
 
         Order order = optionalOrder.get();
         order.setPaymentNumber(completeOrderDetails.getPaymentNumber());
-        order.setStatus(Order.Status.COMPLETED);
+        order.setStatus(Order.Status.PLACED);
 
         List<OrderItem> orderItems = order.getOrderItems();
         orderRepository.save(order);

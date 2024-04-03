@@ -44,24 +44,8 @@ public class OrderService {
         Order order = optionalOrder.get();
         List<OrderItem> orderItems = order.getOrderItems();
 
-        // Build product ids string
-        List<Long> productIds = new ArrayList<>();
-        for (OrderItem orderItem : orderItems) {
-            productIds.add(orderItem.getProductId());
-        }
-
-        StringBuilder productIdsString = new StringBuilder();
-        for (int i = 0; i < productIds.size(); i++) {
-            productIdsString.append(productIds.get(i));
-            if (i < productIds.size() - 1) {
-                productIdsString.append(",");
-            }
-        }
-
-        // fetch products
-        String productUrl = "http://product-service/products/by-ids?ids=" + productIdsString;
-        ResponseEntity<List<ProductDto>> productResponse = restTemplate.exchange(productUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductDto>>() {});
-        List<ProductDto> productDtos = productResponse.getBody();
+        // for displaying order receipts
+        List<ProductDto> productDtos = fetchProductsFromOrderItems(orderItems);
 
         // Construct response using list of order items, products
         OrderDto orderDto = new OrderDto();
@@ -84,12 +68,12 @@ public class OrderService {
         return orderDto;
     }
 
-    public List<Order> getOrdersByStatus(Long userId, boolean pending, boolean delivered, boolean completed) {
+    public List<Order> getOrdersByStatus(Long userId, boolean placed, boolean delivered, boolean completed) {
 
         String status;
 
-        if (pending) {
-            status = "PENDING";
+        if (placed) {
+            status = "PLACED";
         } else if (delivered) {
             status = "DELIVERED";
         } else {
@@ -139,5 +123,27 @@ public class OrderService {
 
         // Return the ID of the saved order
         return savedOrder.getId();
+    }
+
+    private List<ProductDto> fetchProductsFromOrderItems(List<OrderItem> orderItems) {
+        // Build product ids string
+        List<Long> productIds = new ArrayList<>();
+        for (OrderItem orderItem : orderItems) {
+            productIds.add(orderItem.getProductId());
+        }
+
+        StringBuilder productIdsString = new StringBuilder();
+        for (int i = 0; i < productIds.size(); i++) {
+            productIdsString.append(productIds.get(i));
+            if (i < productIds.size() - 1) {
+                productIdsString.append(",");
+            }
+        }
+
+        // fetch products
+        String productUrl = "http://product-service/products/by-ids?ids=" + productIdsString;
+        ResponseEntity<List<ProductDto>> productResponse = restTemplate.exchange(productUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductDto>>() {});
+
+        return productResponse.getBody();
     }
 }

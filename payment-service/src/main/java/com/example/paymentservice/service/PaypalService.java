@@ -2,7 +2,6 @@ package com.example.paymentservice.service;
 
 import com.example.paymentservice.dto.CompletedPaymentDto;
 import com.example.paymentservice.dto.OrderDetailsDto;
-import com.example.paymentservice.message.CompleteOrderDetails;
 import com.example.paymentservice.dto.ProcessedPaymentDto;
 import com.example.paymentservice.publisher.PaymentEventsPublisher;
 import com.paypal.core.PayPalHttpClient;

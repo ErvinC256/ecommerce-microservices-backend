@@ -36,7 +36,7 @@ public class CartService {
         Cart cart = checkIfCartExist(userId);
         List<CartItem> cartItems = cart.getCartItems();
 
-        // fetch products
+        // for displaying cart items on cart page
         List<ProductDto> productDtos = fetchProductsFromCartItems(cartItems);
 
         // Construct response using list of cart items, products
@@ -188,7 +188,7 @@ public class CartService {
 
         List<CartItem> selectedCartItems = cartItemRepository.findAllById(selectedCartItemIds);
 
-        // fetch products
+        // for displaying amount
         List<ProductDto> productDtos = fetchProductsFromCartItems(selectedCartItems);
 
         BigDecimal selectedCartItemsAmount = BigDecimal.ZERO;

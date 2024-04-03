@@ -96,7 +96,8 @@ public class Order {
     }
 
     public static enum Status {
-        PENDING,
+        PENDING, // during payment
+        PLACED,
         DELIVERED,
         COMPLETED
     }

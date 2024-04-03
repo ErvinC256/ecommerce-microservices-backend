@@ -22,6 +22,8 @@ public class Product {
 
     private String description;
 
+    private Long quantityInStock;
+
     @ManyToOne
     @JoinColumn(name = "subcategory_id")
     private Subcategory subcategory;
@@ -70,6 +72,14 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getQuantityInStock() {
+        return quantityInStock;
+    }
+
+    public void setQuantityInStock(Long quantityInStock) {
+        this.quantityInStock = quantityInStock;
     }
 
     public Subcategory getSubcategory() {

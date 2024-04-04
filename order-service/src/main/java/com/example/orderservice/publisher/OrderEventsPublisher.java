@@ -1,7 +1,6 @@
 package com.example.orderservice.publisher;
 
 import com.example.orderservice.config.RabbitMQConfig;
-import com.example.orderservice.dto.CartItemDto;
 import com.example.orderservice.message.CartItemsLog;
 import com.example.orderservice.message.ProductQuantitiesLog;
 import com.example.orderservice.model.OrderItem;
@@ -19,15 +18,17 @@ public class OrderEventsPublisher {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void publishOrderCreatedEventForCart(Long userId, List<Long> cartItemIds) {
+    public void publishOrderPlacedEventForCart(Long userId, List<Long> cartItemIds) {
 
         CartItemsLog cartItemsLog = new CartItemsLog();
         cartItemsLog.setUserId(userId);
         cartItemsLog.setCartItemIds(cartItemIds);
         rabbitTemplate.convertAndSend(RabbitMQConfig.ORDER_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_REMOVE_CART_ITEMS, cartItemsLog);
+
+        System.out.println(cartItemsLog);
     }
 
-    public void publishOrderCreatedEventForInventory(List<OrderItem> orderItems) {
+    public void publishOrderPlacedEventForInventory(List<OrderItem> orderItems) {
 
         ProductQuantitiesLog productQuantitiesLog = new ProductQuantitiesLog();
 

@@ -25,4 +25,12 @@ public class CartItemsLog implements Serializable {
     public void setCartItemIds(List<Long> cartItemIds) {
         this.cartItemIds = cartItemIds;
     }
+
+    @Override
+    public String toString() {
+        return "CartItemsLog{" +
+                "UserId=" + UserId +
+                ", cartItemIds=" + cartItemIds +
+                '}';
+    }
 }

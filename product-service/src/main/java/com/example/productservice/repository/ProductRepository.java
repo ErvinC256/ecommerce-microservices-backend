@@ -17,8 +17,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "(:categoryId IS NULL OR p.subcategory.category.id = :categoryId) " +
             "AND (:subcategoryId IS NULL OR p.subcategory.id = :subcategoryId) " +
             "AND (:manufacturers IS NULL OR p.manufacturer IN :manufacturers) " +
-            "AND (:minPrice IS NULL OR p.price >= :minPrice) " +
-            "AND (:maxPrice IS NULL OR p.price <= :maxPrice)")
+            "AND (:minPrice IS NULL OR p.unitPrice >= :minPrice) " +
+            "AND (:maxPrice IS NULL OR p.unitPrice <= :maxPrice)")
     Page<Product> findByCriteria(
             @Param("categoryId") Long categoryId,
             @Param("subcategoryId") Long subcategoryId,
@@ -44,8 +44,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "(:categoryId IS NULL OR p.subcategory.category.id = :categoryId) " +
             "AND (:subcategoryId IS NULL OR p.subcategory.id = :subcategoryId) " +
             "AND (:manufacturers IS NULL OR p.manufacturer IN :manufacturers) " +
-            "AND (:minPrice IS NULL OR p.price >= :minPrice) " +
-            "AND (:maxPrice IS NULL OR p.price <= :maxPrice)")
+            "AND (:minPrice IS NULL OR p.unitPrice >= :minPrice) " +
+            "AND (:maxPrice IS NULL OR p.unitPrice <= :maxPrice)")
     List<String> findDistinctManufacturersByCriteria(
             @Param("categoryId") Long categoryId,
             @Param("subcategoryId") Long subcategoryId,

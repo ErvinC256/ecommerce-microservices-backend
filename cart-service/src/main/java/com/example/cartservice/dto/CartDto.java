@@ -37,7 +37,8 @@ public class CartDto {
         // from product service
         private String productName;
         private String manufacturer;
-        private BigDecimal productPrice;
+        private BigDecimal unitPrice;
+        private Long quantityInStock;
 
         public Long getCartItemId() {
             return cartItemId;
@@ -79,12 +80,20 @@ public class CartDto {
             this.manufacturer = manufacturer;
         }
 
-        public BigDecimal getProductPrice() {
-            return productPrice;
+        public BigDecimal getUnitPrice() {
+            return unitPrice;
         }
 
-        public void setProductPrice(BigDecimal productPrice) {
-            this.productPrice = productPrice;
+        public void setUnitPrice(BigDecimal unitPrice) {
+            this.unitPrice = unitPrice;
+        }
+
+        public Long getQuantityInStock() {
+            return quantityInStock;
+        }
+
+        public void setQuantityInStock(Long quantityInStock) {
+            this.quantityInStock = quantityInStock;
         }
     }
 

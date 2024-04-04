@@ -196,7 +196,7 @@ public class CartService {
         for (int i = 0; i < selectedCartItems.size(); i++) {
 
             Long quantity = selectedCartItems.get(i).getQuantity();
-            BigDecimal unitPrice = productDtos.get(i).getProductPrice();
+            BigDecimal unitPrice = productDtos.get(i).getUnitPrice();
 
             BigDecimal totalPriceForItem = unitPrice.multiply(BigDecimal.valueOf(quantity));
             selectedCartItemsAmount = selectedCartItemsAmount.add(totalPriceForItem);

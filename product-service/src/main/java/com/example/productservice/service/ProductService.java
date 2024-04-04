@@ -58,7 +58,8 @@ public class ProductService {
             ProductDto productDto = new ProductDto();
             productDto.setProductName(product.getName());
             productDto.setManufacturer(product.getManufacturer());
-            productDto.setProductPrice(product.getPrice());
+            productDto.setUnitPrice(product.getUnitPrice());
+            productDto.setQuantityInStock(product.getQuantityInStock());
 
             productDtos.add(productDto);
         });

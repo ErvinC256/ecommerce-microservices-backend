@@ -45,8 +45,8 @@ public class PaymentEventsListener {
         orderRepository.save(order);
 
         //event chaining
-        orderEventsPublisher.publishOrderCreatedEventForCart(completeOrderDetails.getUserId(),
+        orderEventsPublisher.publishOrderPlacedEventForCart(completeOrderDetails.getUserId(),
                                                              completeOrderDetails.getCartItemIds());
-        orderEventsPublisher.publishOrderCreatedEventForInventory(orderItems);
+        orderEventsPublisher.publishOrderPlacedEventForInventory(orderItems);
     }
 }

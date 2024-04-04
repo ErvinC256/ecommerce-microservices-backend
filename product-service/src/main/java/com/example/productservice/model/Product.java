@@ -18,11 +18,11 @@ public class Product {
 
     private String manufacturer;
 
-    private BigDecimal price;
+    private BigDecimal unitPrice;
 
     private String description;
 
-    private Long quantityInStock;
+    private Long quantityInStock; // duplicate data from inventory; need to sync
 
     @ManyToOne
     @JoinColumn(name = "subcategory_id")
@@ -58,12 +58,12 @@ public class Product {
         this.manufacturer = manufacturer;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
     public String getDescription() {

@@ -69,7 +69,7 @@ public class OrderDto {
 
         // from product service
         private String productName;
-        private BigDecimal productPrice;
+        private BigDecimal unitPrice;
 
         public String getProductId() {
             return productId;
@@ -95,12 +95,12 @@ public class OrderDto {
             this.productName = productName;
         }
 
-        public BigDecimal getProductPrice() {
-            return productPrice;
+        public BigDecimal getUnitPrice() {
+            return unitPrice;
         }
 
-        public void setProductPrice(BigDecimal productPrice) {
-            this.productPrice = productPrice;
+        public void setUnitPrice(BigDecimal unitPrice) {
+            this.unitPrice = unitPrice;
         }
     }
 

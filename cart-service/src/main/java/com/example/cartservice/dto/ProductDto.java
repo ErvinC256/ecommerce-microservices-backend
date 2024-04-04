@@ -2,12 +2,13 @@ package com.example.cartservice.dto;
 
 import java.math.BigDecimal;
 
-//product to cart
+//product to cart, order
 public class ProductDto {
 
     private String productName;
     private String manufacturer;
-    private BigDecimal productPrice;
+    private BigDecimal unitPrice;
+    private Long quantityInStock;
 
     public String getProductName() {
         return productName;
@@ -25,12 +26,20 @@ public class ProductDto {
         this.manufacturer = manufacturer;
     }
 
-    public BigDecimal getProductPrice() {
-        return productPrice;
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setProductPrice(BigDecimal productPrice) {
-        this.productPrice = productPrice;
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public Long getQuantityInStock() {
+        return quantityInStock;
+    }
+
+    public void setQuantityInStock(Long quantityInStock) {
+        this.quantityInStock = quantityInStock;
     }
 }
 

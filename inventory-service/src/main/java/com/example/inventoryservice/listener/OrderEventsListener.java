@@ -37,6 +37,7 @@ public class OrderEventsListener {
             inventoryRepository.save(inventory);
         });
 
+        // event chaining
         inventoryEventsPublisher.publishInventoryUpdatedEvent(productQuantities);
     }
 }

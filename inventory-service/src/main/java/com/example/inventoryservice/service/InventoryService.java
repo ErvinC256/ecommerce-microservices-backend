@@ -1,44 +1,27 @@
 package com.example.inventoryservice.service;
 
-import com.example.inventoryservice.dto.InventoryDto;
 import com.example.inventoryservice.model.Inventory;
+import com.example.inventoryservice.publisher.InventoryEventsPublisher;
 import com.example.inventoryservice.repository.InventoryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class InventoryService {
 
     private final InventoryRepository inventoryRepository;
+    private final InventoryEventsPublisher inventoryEventsPublisher;
 
-    public InventoryService(InventoryRepository inventoryRepository) {
+    public InventoryService(InventoryRepository inventoryRepository, InventoryEventsPublisher inventoryEventsPublisher) {
         this.inventoryRepository = inventoryRepository;
+        this.inventoryEventsPublisher = inventoryEventsPublisher;
     }
 
-    public List<InventoryDto> getInventories(List<Long> productIds) {
-
-        List<InventoryDto> inventoryDtos = new ArrayList<>();
-
-        // to preserve order
-        productIds.forEach(productId -> {
-            Inventory inventory = inventoryRepository.findByProductId(productId);
-
-            InventoryDto inventoryDto = new InventoryDto();
-            inventoryDto.setQuantityInStock(inventory.getQuantityInStock());
-
-            inventoryDtos.add(inventoryDto);
-        });
-
-        return inventoryDtos;
-    }
-
-    public void updateInventory(Long id, Long incrementStockCount) {
+    public void updateInventory(Long id, Long stockIncrementOrDecrement) {
 
         Optional<Inventory> inventoryOptional = inventoryRepository.findById(id);
 
@@ -50,12 +33,17 @@ public class InventoryService {
         Inventory inventory = inventoryOptional.get();
 
         Long currentStock = inventory.getQuantityInStock();
-        currentStock += incrementStockCount;
+        currentStock += stockIncrementOrDecrement;
 
         inventory.setQuantityInStock(currentStock);
         inventory.setLastUpdated(LocalDateTime.now());
 
         inventoryRepository.save(inventory);
+
+        Map<Long, Long> productQuantities = new HashMap<>();
+        productQuantities.put(id, stockIncrementOrDecrement);
+
+        inventoryEventsPublisher.publishInventoryUpdatedEvent(productQuantities);
     }
 }
 

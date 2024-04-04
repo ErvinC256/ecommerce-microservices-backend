@@ -1,10 +1,7 @@
 package com.example.inventoryservice.controller;
 
-import com.example.inventoryservice.dto.InventoryDto;
 import com.example.inventoryservice.service.InventoryService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/inventories")
@@ -18,9 +15,9 @@ public class InventoryController {
 
     @PutMapping("/{id}")
     public void updateInventory(@PathVariable Long id,
-                                @RequestParam Long incrementStockCount) {
+                                @RequestParam Long stockIncrementOrDecrement) {
 
-        inventoryService.updateInventory(id, incrementStockCount);
+        inventoryService.updateInventory(id, stockIncrementOrDecrement);
     }
 
     //test

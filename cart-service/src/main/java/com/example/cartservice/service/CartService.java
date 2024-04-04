@@ -36,8 +36,13 @@ public class CartService {
         Cart cart = checkIfCartExist(userId);
         List<CartItem> cartItems = cart.getCartItems();
 
+        List<Long> productIds = new ArrayList<>();
+        for (CartItem cartItem : cartItems) {
+            productIds.add(cartItem.getProductId());
+        }
+
         // for displaying cart items on cart page
-        List<ProductDto> productDtos = fetchProductsFromCartItems(cartItems);
+        List<ProductDto> productDtos = fetchProductsGivenProductIds(productIds);
 
         // Construct response using list of cart items, products
         CartDto cartDto = new CartDto();
@@ -188,8 +193,13 @@ public class CartService {
 
         List<CartItem> selectedCartItems = cartItemRepository.findAllById(selectedCartItemIds);
 
+        List<Long> productIds = new ArrayList<>();
+        for (CartItem cartItem : selectedCartItems) {
+            productIds.add(cartItem.getProductId());
+        }
+
         // for displaying amount
-        List<ProductDto> productDtos = fetchProductsFromCartItems(selectedCartItems);
+        List<ProductDto> productDtos = fetchProductsGivenProductIds(productIds);
 
         BigDecimal selectedCartItemsAmount = BigDecimal.ZERO;
 
@@ -205,12 +215,7 @@ public class CartService {
         return selectedCartItemsAmount;
     }
 
-    private List<ProductDto> fetchProductsFromCartItems(List<CartItem> cartItems) {
-
-        List<Long> productIds = new ArrayList<>();
-        for (CartItem cartItem : cartItems) {
-            productIds.add(cartItem.getProductId());
-        }
+    private List<ProductDto> fetchProductsGivenProductIds(List<Long> productIds) {
 
         StringBuilder productIdsString = new StringBuilder();
         for (int i = 0; i < productIds.size(); i++) {

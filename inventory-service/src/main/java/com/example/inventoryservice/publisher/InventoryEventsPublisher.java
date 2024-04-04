@@ -15,9 +15,9 @@ public class InventoryEventsPublisher {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void publishInventoryUpdatedEvent(Map<Long, Long> purchasedProductQuantities) {
+    public void publishInventoryUpdatedEvent(Map<Long, Long> productQuantities) {
 
-        rabbitTemplate.convertAndSend(RabbitMQConfig.INVENTORY_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_UPDATE_STOCK, purchasedProductQuantities);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.INVENTORY_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_UPDATE_STOCK, productQuantities);
 
     }
 

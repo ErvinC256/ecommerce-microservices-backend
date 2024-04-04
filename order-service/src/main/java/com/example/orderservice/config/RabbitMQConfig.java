@@ -18,7 +18,7 @@ public class RabbitMQConfig {
     //with cart service and inventory service (acting as publisher)
     public static final String ORDER_SERVICE_EXCHANGE = "x.order-service-exchange";
     public static final String ROUTING_KEY_REMOVE_CART_ITEMS = "remove-cart-items";
-    public static final String ROUTING_KEY_REDUCE_INVENTORIES = "reduce-inventories";
+    public static final String ROUTING_KEY_REDUCE_INVENTORY_STOCK = "reduce-inventory-stock";
 
     private final CachingConnectionFactory cachingConnectionFactory;
 

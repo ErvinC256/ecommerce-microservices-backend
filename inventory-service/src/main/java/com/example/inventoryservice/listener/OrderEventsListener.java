@@ -1,7 +1,6 @@
 package com.example.inventoryservice.listener;
 
 import com.example.inventoryservice.config.RabbitMQConfig;
-import com.example.inventoryservice.message.ProductQuantitiesLog;
 import com.example.inventoryservice.model.Inventory;
 import com.example.inventoryservice.publisher.InventoryEventsPublisher;
 import com.example.inventoryservice.repository.InventoryRepository;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -25,20 +23,20 @@ public class OrderEventsListener {
     }
 
     @Transactional
-    @RabbitListener(queues = RabbitMQConfig.REDUCE_INVENTORIES_QUEUE)
-    public void handleOrderCreatedEvent(Map<Long, Long> purchasedProductQuantities) {
+    @RabbitListener(queues = RabbitMQConfig.REDUCE_INVENTORY_STOCK_QUEUE)
+    public void handleOrderCreatedEvent(Map<Long, Long> productQuantities) {
 
-        purchasedProductQuantities.keySet().forEach(key -> {
+        productQuantities.keySet().forEach(key -> {
             Inventory inventory = inventoryRepository.findByProductId(key);
 
             Long quantityLeft = inventory.getQuantityInStock();
-            quantityLeft -= purchasedProductQuantities.get(key);
+            quantityLeft += productQuantities.get(key); // minus sign in value
             inventory.setQuantityInStock(quantityLeft);
 
             inventory.setLastUpdated(LocalDateTime.now());
             inventoryRepository.save(inventory);
         });
 
-        inventoryEventsPublisher.publishInventoryUpdatedEvent(purchasedProductQuantities);
+        inventoryEventsPublisher.publishInventoryUpdatedEvent(productQuantities);
     }
 }

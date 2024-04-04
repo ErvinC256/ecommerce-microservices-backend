@@ -31,13 +31,13 @@ public class OrderEventsPublisher {
 
     public void publishOrderPlacedEventForInventory(List<OrderItem> orderItems) {
 
-        Map<Long, Long> purchasedProductQuantities = new HashMap<>();
+        Map<Long, Long> productQuantities = new HashMap<>();
 
         orderItems.forEach(orderItem -> {
-
-            purchasedProductQuantities.put(orderItem.getProductId(), orderItem.getQuantityPurchased());
+            // minus sign
+            productQuantities.put(orderItem.getProductId(), -orderItem.getQuantityPurchased());
         });
 
-        rabbitTemplate.convertAndSend(RabbitMQConfig.ORDER_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_REDUCE_INVENTORIES, purchasedProductQuantities);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.ORDER_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_REDUCE_INVENTORY_STOCK, productQuantities);
     }
 }

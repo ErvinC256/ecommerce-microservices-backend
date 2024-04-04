@@ -16,12 +16,6 @@ public class InventoryController {
         this.inventoryService = inventoryService;
     }
 
-    @GetMapping("")
-    public List<InventoryDto> getInventories(@RequestParam List<Long> productIds) {
-
-        return inventoryService.getInventories(productIds);
-    }
-
     @PutMapping("/{id}")
     public void updateInventory(@PathVariable Long id,
                                 @RequestParam Long incrementStockCount) {

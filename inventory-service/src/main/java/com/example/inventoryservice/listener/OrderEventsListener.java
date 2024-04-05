@@ -24,13 +24,13 @@ public class OrderEventsListener {
 
     @Transactional
     @RabbitListener(queues = RabbitMQConfig.REDUCE_INVENTORY_STOCK_QUEUE)
-    public void handleOrderCreatedEvent(Map<Long, Long> productQuantities) {
+    public void handleOrderCreatedEvent(Map<Long, Long> productQuantityMap) {
 
-        productQuantities.keySet().forEach(key -> {
+        productQuantityMap.keySet().forEach(key -> {
             Inventory inventory = inventoryRepository.findByProductId(key);
 
             Long quantityLeft = inventory.getQuantityInStock();
-            quantityLeft += productQuantities.get(key); // minus sign in value
+            quantityLeft += productQuantityMap.get(key); // minus sign in value
             inventory.setQuantityInStock(quantityLeft);
 
             inventory.setLastUpdated(LocalDateTime.now());
@@ -38,6 +38,6 @@ public class OrderEventsListener {
         });
 
         // event chaining
-        inventoryEventsPublisher.publishInventoryUpdatedEvent(productQuantities);
+        inventoryEventsPublisher.publishInventoryUpdatedEvent(productQuantityMap);
     }
 }

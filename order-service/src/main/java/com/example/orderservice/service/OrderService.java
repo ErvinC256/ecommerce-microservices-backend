@@ -17,10 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -98,21 +95,15 @@ public class OrderService {
         order.setDateCreated(LocalDateTime.now());
         order.setStatus(Order.Status.PENDING);
 
-        List<Long> cartItemIds = initOrderDetailsDto.getCartItemIds();
-        Long userId = initOrderDetailsDto.getUserId();
-
-        List<CartItemDto> cartItemDtos = fetchCartItemsGivenCartItemIds(userId, cartItemIds);
-
-        for (CartItemDto cartItemDto : cartItemDtos) {
-
-            //create order items
+        Map<Long, Long> productQuantityMap = initOrderDetailsDto.getProductQuantityMap();
+        productQuantityMap.keySet().forEach(key -> {
             OrderItem orderItem = new OrderItem();
-            orderItem.setQuantityPurchased(cartItemDto.getQuantity());
-            orderItem.setProductId(cartItemDto.getProductId());
+            orderItem.setQuantityPurchased(productQuantityMap.get(key));
+            orderItem.setProductId(key);
             orderItem.setOrder(order);
 
             order.getOrderItems().add(orderItem);
-        }
+        });
 
         // Save the order
         Order savedOrder = orderRepository.save(order);

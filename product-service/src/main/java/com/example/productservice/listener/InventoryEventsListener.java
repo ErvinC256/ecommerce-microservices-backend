@@ -22,9 +22,9 @@ public class InventoryEventsListener {
 
     @Transactional
     @RabbitListener(queues = RabbitMQConfig.UPDATE_STOCK_QUEUE)
-    public void handleInventoryUpdatedEvent(Map<Long, Long> productQuantities) {
+    public void handleInventoryUpdatedEvent(Map<Long, Long> productQuantityMap) {
 
-        productQuantities.keySet().forEach(key -> {
+        productQuantityMap.keySet().forEach(key -> {
             Optional<Product> productOptional = productRepository.findById(key);
 
             if (!productOptional.isPresent()) {
@@ -34,7 +34,7 @@ public class InventoryEventsListener {
             Product product =productOptional.get();
 
             Long quantityLeft = product.getQuantityInStock();
-            quantityLeft += productQuantities.get(key); // minus sign in value
+            quantityLeft += productQuantityMap.get(key); // minus sign in value
             product.setQuantityInStock(quantityLeft);
 
             productRepository.save(product);

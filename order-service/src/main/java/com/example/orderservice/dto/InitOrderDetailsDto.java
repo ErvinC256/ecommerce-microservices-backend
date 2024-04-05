@@ -2,14 +2,16 @@ package com.example.orderservice.dto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //frontend to order
 public class InitOrderDetailsDto {
 
     private Long userId;
     private BigDecimal amount;
-    private List<Long> cartItemIds = new ArrayList<>();
+    private Map<Long, Long> productQuantityMap = new HashMap<>();
 
     public Long getUserId() {
         return userId;
@@ -27,12 +29,12 @@ public class InitOrderDetailsDto {
         this.amount = amount;
     }
 
-    public List<Long> getCartItemIds() {
-        return cartItemIds;
+    public Map<Long, Long> getProductQuantityMap() {
+        return productQuantityMap;
     }
 
-    public void setCartItemIds(List<Long> cartItemIds) {
-        this.cartItemIds = cartItemIds;
+    public void setProductQuantityMap(Map<Long, Long> productQuantityMap) {
+        this.productQuantityMap = productQuantityMap;
     }
 }
 

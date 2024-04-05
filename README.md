@@ -4,7 +4,7 @@
 
 <img src="https://github.com/ErvinC256/ecommerce-microservices-backend/assets/149756489/31b77ae6-bcc7-497c-a0fd-a765616cb05a" width="75%">
 <br><br>
-<img src="https://github.com/ErvinC256/ecommerce-microservices-backend/assets/149756489/361b094f-6210-41e9-8ff1-cf7aa38c91aa" width="75%">
+<img src="https://github.com/ErvinC256/ecommerce-microservices-backend/assets/149756489/599da99d-fd54-48f1-8de6-e288bea2a357" width="75%">
 
 ---
 

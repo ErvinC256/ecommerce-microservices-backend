@@ -61,15 +61,17 @@ public class CartService {
         return cartDto;
     }
 
-    public CartItem addCartItem(Long userId, AddToCartDto addToCartDto) {
+    public CartItem addCartItem(Long userId, Map<Long, Long> productQuantityMap) {
 
         Cart cart = checkIfCartExist(userId);
+
+        Long productId = productQuantityMap.keySet().toArray(new Long[0])[0];
 
         //create a new cart item
         CartItem cartItem = new CartItem();
         cartItem.setCart(cart);
-        cartItem.setProductId(addToCartDto.getProductId());
-        cartItem.setQuantity(addToCartDto.getQuantity());
+        cartItem.setProductId(productId);
+        cartItem.setQuantity(productQuantityMap.get(productId));
 
         //update existing cart
         cart.setLastUpdated(LocalDateTime.now());
@@ -79,14 +81,14 @@ public class CartService {
         return cartItemRepository.save(cartItem);
     }
 
-    public List<Long> addCartItems(Long userId, AddToCartBulkDto addToCartBulkDto) {
+    public List<Long> addCartItemsInBulk(Long userId, Map<Long, Long> productQuantityMap) {
 
         Cart cart = checkIfCartExist(userId);
 
-        addToCartBulkDto.getAddToCartBulkItems().forEach(addToCartBulkItem -> {
+        productQuantityMap.keySet().forEach(key -> {
             CartItem cartItem = new CartItem();
-            cartItem.setProductId(addToCartBulkItem.getProductId());
-            cartItem.setQuantity(addToCartBulkItem.getQuantity());
+            cartItem.setProductId(key);
+            cartItem.setQuantity(productQuantityMap.get(key));
             cartItem.setCart(cart);
 
             cart.getCartItems().add(cartItem);
@@ -107,7 +109,7 @@ public class CartService {
         Collections.sort(cartItemIds, Collections.reverseOrder());
 
         //fetch cart item ids created from bulk
-        int numReorderItems = addToCartBulkDto.getAddToCartBulkItems().size();
+        int numReorderItems = productQuantityMap.size();
         List<Long> newCartItemIds = new ArrayList<>();
 
         for (int i = 0; i < numReorderItems; i++) {

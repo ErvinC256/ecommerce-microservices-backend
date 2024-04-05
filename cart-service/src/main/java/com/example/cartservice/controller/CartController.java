@@ -1,8 +1,6 @@
 package com.example.cartservice.controller;
 
-import com.example.cartservice.dto.AddToCartDto;
 import com.example.cartservice.dto.CartDto;
-import com.example.cartservice.dto.AddToCartBulkDto;
 import com.example.cartservice.model.CartItem;
 import com.example.cartservice.service.CartService;
 import org.springframework.http.HttpStatus;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/carts")
@@ -30,18 +29,18 @@ public class CartController {
     //cart-items
     @PostMapping("/{userId}/cart-items")
     public ResponseEntity<CartItem> addCartItem(@PathVariable Long userId,
-                                                @RequestBody AddToCartDto addToCartDto) {
+                                                @RequestBody Map<Long, Long> productQuantityMap) {
 
-        CartItem cartItem = cartService.addCartItem(userId, addToCartDto);
+        CartItem cartItem = cartService.addCartItem(userId, productQuantityMap);
 
         return new ResponseEntity<>(cartItem, HttpStatus.CREATED);
     }
 
     @PostMapping("/{userId}/cart-items/bulk")
-    public ResponseEntity<List<Long>> addCartItems(@PathVariable Long userId,
-                                                    @RequestBody AddToCartBulkDto addToCartBulkDto) {
+    public ResponseEntity<List<Long>> addCartItemsInBulk(@PathVariable Long userId,
+                                                    @RequestBody Map<Long, Long> productQuantityMap) {
 
-        List<Long> cartItemIds = cartService.addCartItems(userId, addToCartBulkDto);
+        List<Long> cartItemIds = cartService.addCartItemsInBulk(userId, productQuantityMap);
 
         return new ResponseEntity<>(cartItemIds, HttpStatus.CREATED);
     }

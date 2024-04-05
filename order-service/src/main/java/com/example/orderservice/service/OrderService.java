@@ -1,6 +1,5 @@
 package com.example.orderservice.service;
 
-import com.example.orderservice.dto.CartItemDto;
 import com.example.orderservice.dto.InitOrderDetailsDto;
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.dto.ProductDto;
@@ -130,20 +129,4 @@ public class OrderService {
         return productResponse.getBody();
     }
 
-    private List<CartItemDto> fetchCartItemsGivenCartItemIds(Long userId, List<Long> cartItemIds) {
-
-        // Build cart item ids string
-        StringBuilder cartItemIdsString = new StringBuilder();
-        for (int i = 0; i < cartItemIds.size(); i++) {
-            cartItemIdsString.append(cartItemIds.get(i));
-            if (i < cartItemIds.size() - 1) {
-                cartItemIdsString.append(",");
-            }
-        }
-
-        String cartServiceUrl = String.format("http://cart-service/carts/%s/cart-items?cartItemIds=%s", userId, cartItemIdsString);
-        ResponseEntity<List<CartItemDto>> cartItemResponse = restTemplate.exchange(cartServiceUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<CartItemDto>>() {});
-
-        return cartItemResponse.getBody();
-    }
 }

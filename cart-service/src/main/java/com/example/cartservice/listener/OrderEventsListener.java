@@ -1,7 +1,7 @@
 package com.example.cartservice.listener;
 
 import com.example.cartservice.config.RabbitMQConfig;
-import com.example.cartservice.message.CartItemsLog;
+import com.example.cartservice.message.RemoveCartItemsLog;
 import com.example.cartservice.model.Cart;
 import com.example.cartservice.repository.CartItemRepository;
 import com.example.cartservice.repository.CartRepository;
@@ -24,11 +24,11 @@ public class OrderEventsListener {
 
     @Transactional
     @RabbitListener(queues = RabbitMQConfig.REMOVE_CART_ITEMS_QUEUE)
-    public void handleOrderCreatedEvent(CartItemsLog cartItemsLog) {
+    public void handleOrderCreatedEvent(RemoveCartItemsLog removeCartItemsLog) {
 
-        Cart cart = cartRepository.findByUserId(cartItemsLog.getUserId());
+        Cart cart = cartRepository.findByUserId(removeCartItemsLog.getUserId());
 
-        cartItemRepository.deleteAllById(cartItemsLog.getCartItemIds());
+        cartItemRepository.deleteAllById(removeCartItemsLog.getCartItemIds());
 
         cart.setLastUpdated(LocalDateTime.now());
         cartRepository.save(cart);

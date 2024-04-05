@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //order to cart
-public class CartItemsLog implements Serializable {
+public class RemoveCartItemsLog implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long UserId;
     private List<Long> cartItemIds = new ArrayList<>();

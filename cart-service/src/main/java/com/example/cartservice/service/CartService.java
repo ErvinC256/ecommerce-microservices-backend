@@ -61,23 +61,6 @@ public class CartService {
         return cartDto;
     }
 
-    public List<CartItemDto> getCartItems(Long userId, List<Long> cartItemIds) {
-        checkIfCartExist(userId);
-
-        List<CartItemDto> cartItemDtos = new ArrayList<>();
-
-        cartItemRepository.findAllById(cartItemIds).forEach(cartItem -> {
-            CartItemDto cartItemDto = new CartItemDto();
-            cartItemDto.setCartItemId(cartItem.getId());
-            cartItemDto.setProductId(cartItem.getProductId());
-            cartItemDto.setQuantity(cartItem.getQuantity());
-
-            cartItemDtos.add(cartItemDto);
-        });
-
-        return cartItemDtos;
-    }
-
     public CartItem addCartItem(Long userId, AddToCartDto addToCartDto) {
 
         Cart cart = checkIfCartExist(userId);

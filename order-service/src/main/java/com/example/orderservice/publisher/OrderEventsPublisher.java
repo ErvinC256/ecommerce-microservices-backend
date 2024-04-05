@@ -1,7 +1,7 @@
 package com.example.orderservice.publisher;
 
 import com.example.orderservice.config.RabbitMQConfig;
-import com.example.orderservice.message.CartItemsLog;
+import com.example.orderservice.message.RemoveCartItemsLog;
 import com.example.orderservice.model.OrderItem;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
@@ -21,12 +21,12 @@ public class OrderEventsPublisher {
 
     public void publishOrderPlacedEventForCart(Long userId, List<Long> cartItemIds) {
 
-        CartItemsLog cartItemsLog = new CartItemsLog();
-        cartItemsLog.setUserId(userId);
-        cartItemsLog.setCartItemIds(cartItemIds);
-        rabbitTemplate.convertAndSend(RabbitMQConfig.ORDER_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_REMOVE_CART_ITEMS, cartItemsLog);
+        RemoveCartItemsLog removeCartItemsLog = new RemoveCartItemsLog();
+        removeCartItemsLog.setUserId(userId);
+        removeCartItemsLog.setCartItemIds(cartItemIds);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.ORDER_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_REMOVE_CART_ITEMS, removeCartItemsLog);
 
-        System.out.println(cartItemsLog);
+        System.out.println(removeCartItemsLog);
     }
 
     public void publishOrderPlacedEventForInventory(List<OrderItem> orderItems) {

@@ -2,7 +2,6 @@ package com.example.cartservice.controller;
 
 import com.example.cartservice.dto.AddToCartDto;
 import com.example.cartservice.dto.CartDto;
-import com.example.cartservice.dto.CartItemDto;
 import com.example.cartservice.dto.AddToCartBulkDto;
 import com.example.cartservice.model.CartItem;
 import com.example.cartservice.service.CartService;
@@ -29,12 +28,6 @@ public class CartController {
     }
 
     //cart-items
-    @GetMapping("/{userId}/cart-items")
-    public List<CartItemDto> getCartItems(@PathVariable Long userId,
-                                          @RequestParam List<Long> cartItemIds) {
-        return cartService.getCartItems(userId, cartItemIds);
-    }
-
     @PostMapping("/{userId}/cart-items")
     public ResponseEntity<CartItem> addCartItem(@PathVariable Long userId,
                                                 @RequestBody AddToCartDto addToCartDto) {

@@ -7,6 +7,7 @@ public class CartItemDto {
     private Long cartItemQuantity;
     private Long productId;
     private String productName;
+    private String manufacturer;
     private Long subcategoryId;
     private Long quantityInStock;
 
@@ -40,6 +41,14 @@ public class CartItemDto {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     public Long getSubcategoryId() {

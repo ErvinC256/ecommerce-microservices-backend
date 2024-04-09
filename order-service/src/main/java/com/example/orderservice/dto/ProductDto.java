@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 public class ProductDto {
 
     private String productName;
+    private Long subcategoryId;
     private String manufacturer;
     private BigDecimal unitPrice;
     private Long quantityInStock;
@@ -16,6 +17,14 @@ public class ProductDto {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public Long getSubcategoryId() {
+        return subcategoryId;
+    }
+
+    public void setSubcategoryId(Long subcategoryId) {
+        this.subcategoryId = subcategoryId;
     }
 
     public String getManufacturer() {
@@ -42,5 +51,4 @@ public class ProductDto {
         this.quantityInStock = quantityInStock;
     }
 }
-
 

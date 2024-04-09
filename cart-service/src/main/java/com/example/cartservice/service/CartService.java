@@ -1,6 +1,7 @@
 package com.example.cartservice.service;
 
 import com.example.cartservice.dto.*;
+import com.example.cartservice.mapper.CartItemDtoForCartDtoMapper;
 import com.example.cartservice.mapper.CartItemDtoMapper;
 import com.example.cartservice.model.Cart;
 import com.example.cartservice.model.CartItem;
@@ -51,7 +52,7 @@ public class CartService {
             CartItem cartItem = cartItems.get(i);
             ProductDto productDto = productDtos.get(i);
 
-            CartDto.CartItemDto cartItemDto = CartItemDtoMapper.INSTANCE.from(cartItem, productDto);
+            CartDto.CartItemDto cartItemDto = CartItemDtoForCartDtoMapper.INSTANCE.from(cartItem, productDto);
 
             cartDto.getCartItemDtos().add(cartItemDto);
         }
@@ -61,27 +62,26 @@ public class CartService {
         return cartDto;
     }
 
-    public CartItem addCartItem(Long userId, Map<Long, Long> productQuantityMap) {
+    public CartItemDto getCartItem(Long userId, Long cartItemId) {
+        checkIfCartExist(userId);
 
-        Cart cart = checkIfCartExist(userId);
+        Optional<CartItem> cartItemOptional = cartItemRepository.findById(cartItemId);
 
-        Long productId = productQuantityMap.keySet().toArray(new Long[0])[0];
+        if (!cartItemOptional.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cart Item not found for user id " + userId);
+        }
 
-        //create a new cart item
-        CartItem cartItem = new CartItem();
-        cartItem.setCart(cart);
-        cartItem.setProductId(productId);
-        cartItem.setQuantity(productQuantityMap.get(productId));
+        CartItem cartItem = cartItemOptional.get();
+        // for displaying cart items on cart page
+        List<ProductDto> productDtos = fetchProductsGivenProductIds(List.of(cartItem.getProductId()));
 
-        //update existing cart
-        cart.setLastUpdated(LocalDateTime.now());
-        cartRepository.save(cart); //save cart separately to avoid cascade
+        CartItemDto cartItemDto = CartItemDtoMapper.INSTANCE.from(cartItem, productDtos.get(0));
 
-        //save and retrieve for id
-        return cartItemRepository.save(cartItem);
+        System.out.println(cartItemDto.getSubcategoryId() + " and " + cartItemDto.getQuantityInStock());
+        return cartItemDto;
     }
 
-    public List<Long> addCartItemsInBulk(Long userId, Map<Long, Long> productQuantityMap) {
+    public List<Long> addCartItems(Long userId, Map<Long, Long> productQuantityMap) {
 
         Cart cart = checkIfCartExist(userId);
 

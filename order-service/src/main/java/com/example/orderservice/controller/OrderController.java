@@ -42,6 +42,12 @@ public class OrderController {
         return new ResponseEntity<>(orderId, HttpStatus.CREATED);
     }
 
+    @GetMapping("/calculate-units-purchased")
+    public Long calculateUnitsPurchasedForProduct(@RequestParam Long productId) {
+
+        return orderService.calculateUnitsPurchasedForProduct(productId);
+    }
+
     @GetMapping("/test")
     public String test() {
         return "Hello from OrderController!";

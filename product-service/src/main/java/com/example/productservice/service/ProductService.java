@@ -57,6 +57,7 @@ public class ProductService {
 
             ProductDto productDto = new ProductDto();
             productDto.setProductName(product.getName());
+            productDto.setSubcategoryId(product.getSubcategory().getId());
             productDto.setManufacturer(product.getManufacturer());
             productDto.setUnitPrice(product.getUnitPrice());
             productDto.setQuantityInStock(product.getQuantityInStock());

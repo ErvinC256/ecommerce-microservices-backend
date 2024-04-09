@@ -17,4 +17,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByStatus(@Param("userId") Long userId,
                              @Param("status") Order.Status status);
 
+    @Query("SELECT COALESCE(SUM(oi.quantityPurchased), 0) FROM Order o JOIN o.orderItems oi WHERE oi.productId = :productId")
+    Long calculateUnitsPurchasedForProduct(@Param("productId") Long productId);
+
 }

@@ -111,6 +111,10 @@ public class OrderService {
         return savedOrder.getId();
     }
 
+    public Long calculateUnitsPurchasedForProduct(Long productId) {
+        return orderRepository.calculateUnitsPurchasedForProduct(productId);
+    }
+
     private List<ProductDto> fetchProductsGivenProductIds(List<Long> productIds) {
 
         // Build product ids string

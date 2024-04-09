@@ -7,7 +7,7 @@ INSERT INTO inventory (quantity_in_stock, minimum_stock, product_id) VALUES (178
 INSERT INTO inventory (quantity_in_stock, minimum_stock, product_id) VALUES (132, 20, 7);
 INSERT INTO inventory (quantity_in_stock, minimum_stock, product_id) VALUES (159, 20, 8);
 INSERT INTO inventory (quantity_in_stock, minimum_stock, product_id) VALUES (111, 20, 9);
-INSERT INTO inventory (quantity_in_stock, minimum_stock, product_id) VALUES (167, 20, 10);
+INSERT INTO inventory (quantity_in_stock, minimum_stock, product_id) VALUES (0, 20, 10);
 INSERT INTO inventory (quantity_in_stock, minimum_stock, product_id) VALUES (134, 20, 11);
 INSERT INTO inventory (quantity_in_stock, minimum_stock, product_id) VALUES (198, 20, 12);
 INSERT INTO inventory (quantity_in_stock, minimum_stock, product_id) VALUES (103, 20, 13);

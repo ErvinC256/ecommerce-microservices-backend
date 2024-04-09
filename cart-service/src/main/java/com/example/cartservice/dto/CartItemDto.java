@@ -1,15 +1,39 @@
 package com.example.cartservice.dto;
 
-import java.math.BigDecimal;
+//cart to frontend
+public class CartItemDto {
 
-//product to cart, order
-public class ProductDto {
-
+    private Long cartItemId;
+    private Long cartItemQuantity;
+    private Long productId;
     private String productName;
     private Long subcategoryId;
     private String manufacturer;
-    private BigDecimal unitPrice;
     private Long quantityInStock;
+
+    public Long getCartItemId() {
+        return cartItemId;
+    }
+
+    public void setCartItemId(Long cartItemId) {
+        this.cartItemId = cartItemId;
+    }
+
+    public Long getCartItemQuantity() {
+        return cartItemQuantity;
+    }
+
+    public void setCartItemQuantity(Long cartItemQuantity) {
+        this.cartItemQuantity = cartItemQuantity;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
 
     public String getProductName() {
         return productName;
@@ -35,14 +59,6 @@ public class ProductDto {
         this.manufacturer = manufacturer;
     }
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
     public Long getQuantityInStock() {
         return quantityInStock;
     }
@@ -51,4 +67,3 @@ public class ProductDto {
         this.quantityInStock = quantityInStock;
     }
 }
-

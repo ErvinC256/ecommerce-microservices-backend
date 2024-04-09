@@ -1,6 +1,7 @@
 package com.example.cartservice.controller;
 
 import com.example.cartservice.dto.CartDto;
+import com.example.cartservice.dto.CartItemDto;
 import com.example.cartservice.model.CartItem;
 import com.example.cartservice.service.CartService;
 import org.springframework.http.HttpStatus;
@@ -27,20 +28,16 @@ public class CartController {
     }
 
     //cart-items
-    @PostMapping("/{userId}/cart-items")
-    public ResponseEntity<CartItem> addCartItem(@PathVariable Long userId,
-                                                @RequestBody Map<Long, Long> productQuantityMap) {
-
-        CartItem cartItem = cartService.addCartItem(userId, productQuantityMap);
-
-        return new ResponseEntity<>(cartItem, HttpStatus.CREATED);
+    @GetMapping("/{userId}/cart-items/{cartItemId}")
+    public CartItemDto getCartItem(@PathVariable Long userId, @PathVariable Long cartItemId) {
+        return cartService.getCartItem(userId, cartItemId);
     }
 
-    @PostMapping("/{userId}/cart-items/bulk")
-    public ResponseEntity<List<Long>> addCartItemsInBulk(@PathVariable Long userId,
+    @PostMapping("/{userId}/cart-items")
+    public ResponseEntity<List<Long>> addCartItems(@PathVariable Long userId,
                                                     @RequestBody Map<Long, Long> productQuantityMap) {
 
-        List<Long> cartItemIds = cartService.addCartItemsInBulk(userId, productQuantityMap);
+        List<Long> cartItemIds = cartService.addCartItems(userId, productQuantityMap);
 
         return new ResponseEntity<>(cartItemIds, HttpStatus.CREATED);
     }
@@ -71,7 +68,7 @@ public class CartController {
         return cartService.countCartItems(userId);
     }
 
-    @GetMapping("/{userId}/cart-items/selected-amount")
+    @GetMapping("/{userId}/cart-items/calculate-amount")
     public BigDecimal calculateSelectedCartItemsAmount(@PathVariable Long userId,
                                                  @RequestParam List<Long> selectedCartItemIds) {
         return cartService.calculateSelectedCartItemsAmount(userId, selectedCartItemIds);

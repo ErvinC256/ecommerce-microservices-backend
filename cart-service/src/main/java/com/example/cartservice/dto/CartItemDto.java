@@ -8,7 +8,6 @@ public class CartItemDto {
     private Long productId;
     private String productName;
     private Long subcategoryId;
-    private String manufacturer;
     private Long quantityInStock;
 
     public Long getCartItemId() {
@@ -49,14 +48,6 @@ public class CartItemDto {
 
     public void setSubcategoryId(Long subcategoryId) {
         this.subcategoryId = subcategoryId;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
     }
 
     public Long getQuantityInStock() {

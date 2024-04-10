@@ -14,6 +14,15 @@ services:
     depends_on:
       - registry-server
 
+  user-service:
+    build: ./user-service
+    restart: always
+    ports:
+      - "8081:8081"
+    depends_on:
+      - registry-server
+      - user-mysqldb
+
   product-service:
     build: ./product-service
     restart: always
@@ -32,11 +41,24 @@ services:
       - registry-server
       - cart-mysqldb
 
-  product-mysqldb:
+  user-mysqldb:
     image: "mysql:8.0"
     restart: always
     ports:
       - "3306:3306"
+    environment:
+      MYSQL_DATABASE: user-service-db
+      MYSQL_USER: user-service
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql_user_data:/var/lib/mysql
+
+  product-mysqldb:
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - "3307:3306"
     environment:
       MYSQL_DATABASE: product-service-db
       MYSQL_USER: product-service
@@ -49,7 +71,7 @@ services:
     image: "mysql:8.0"
     restart: always
     ports:
-      - "3307:3306"
+      - "3308:3306"
     environment:
       MYSQL_DATABASE: cart-service-db
       MYSQL_USER: cart-service
@@ -66,5 +88,7 @@ services:
       - "15672:15672"
 
 volumes:
+  mysql_user_data:
   mysql_product_data:
   mysql_cart_data:
+

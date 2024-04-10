@@ -1061,62 +1061,6 @@ INSERT INTO product_spec (spec_name, spec_value, product_id) VALUES ('Weight', '
 INSERT INTO product_spec (spec_name, spec_value, product_id) VALUES ('Print Speed (Black)', 'Up to 55 ppm', 81);
 INSERT INTO product_spec (spec_name, spec_value, product_id) VALUES ('Monthly Duty Cycle', '250,000 pages', 81);
 
---CREATE TABLE IF NOT EXISTS category (
---    id BIGINT NOT NULL AUTO_INCREMENT,
---    name VARCHAR(255) NOT NULL,
---    PRIMARY KEY (`id`)
---)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
---
---CREATE TABLE IF NOT EXISTS subcategory (
---    id BIGINT NOT NULL AUTO_INCREMENT,
---    name VARCHAR(255) NOT NULL,
---    category_id BIGINT,
---    PRIMARY KEY (`id`),
---    FOREIGN KEY (category_id) REFERENCES category(id)
---)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
---
---CREATE TABLE IF NOT EXISTS product (
---    id BIGINT AUTO_INCREMENT PRIMARY KEY,
---    name VARCHAR(255) NOT NULL,
---    manufacturer VARCHAR(255),
---    price DECIMAL(10, 2),
---    description TEXT,
---    subcategory_id BIGINT,
---    FOREIGN KEY (subcategory_id) REFERENCES subcategory(id)
---)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
---
---CREATE TABLE IF NOT EXISTS product_tag (
---    id BIGINT AUTO_INCREMENT PRIMARY KEY,
---    new_arrival BOOLEAN,
---    best_seller BOOLEAN,
---    product_id BIGINT,
---    FOREIGN KEY (product_id) REFERENCES product(id)
---)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
---
---CREATE TABLE IF NOT EXISTS product_spec (
---    id BIGINT AUTO_INCREMENT PRIMARY KEY,
---    spec_name VARCHAR(255) NOT NULL,
---    spec_value VARCHAR(255),
---    product_id BIGINT,
---    FOREIGN KEY (product_id) REFERENCES product(id)
---)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -30,7 +30,7 @@ public class OrderEventsListener {
 
         cartItemRepository.deleteAllById(removeCartItemsLog.getCartItemIds());
 
-        cart.setLastUpdated(LocalDateTime.now());
+//        cart.setLastUpdated(LocalDateTime.now());
         cartRepository.save(cart);
     }
 }

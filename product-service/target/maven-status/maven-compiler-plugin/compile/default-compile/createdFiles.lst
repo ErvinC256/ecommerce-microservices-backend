@@ -1,0 +1,12 @@
+com\example\productservice\model\Subcategory.class
+com\example\productservice\controller\ProductController.class
+com\example\productservice\model\ProductTag.class
+com\example\productservice\model\Category.class
+com\example\productservice\listener\InventoryEventsListener.class
+com\example\productservice\dto\ProductDto.class
+com\example\productservice\repository\ProductRepository.class
+com\example\productservice\service\ProductService.class
+com\example\productservice\ProductServiceApplication.class
+com\example\productservice\config\RabbitMQConfig.class
+com\example\productservice\model\Product.class
+com\example\productservice\model\ProductSpec.class

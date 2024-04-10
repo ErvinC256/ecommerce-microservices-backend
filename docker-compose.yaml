@@ -1,24 +1,70 @@
 version: "3.7"
 services:
+  registry-server:
+    build: ./registry-server
+    restart: always
+    ports:
+      - "8761:8761"
+
+  api-gateway:
+    build: ./api-gateway
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - registry-server
+
   product-service:
     build: ./product-service
     restart: always
     ports:
-      - 8082:8082
-    environment:
-      - spring.datasource.url=jdbc:mysql://mysqldb:3306/product-service-db
+      - "8082:8082"
     depends_on:
-      - mysqldb
-    volumes:
-      - .m2:/root/.m2
+      - registry-server
+      - product-mysqldb
 
-  mysqldb:
+  cart-service:
+    build: ./cart-service
+    restart: always
+    ports:
+      - "8083:8083"
+    depends_on:
+      - registry-server
+      - cart-mysqldb
+
+  product-mysqldb:
     image: "mysql:8.0"
     restart: always
     ports:
-      - 3306:3306
+      - "3306:3306"
     environment:
       MYSQL_DATABASE: product-service-db
       MYSQL_USER: product-service
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql_product_data:/var/lib/mysql
+
+  cart-mysqldb:
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: cart-service-db
+      MYSQL_USER: cart-service
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql_cart_data:/var/lib/mysql
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+volumes:
+  mysql_product_data:
+  mysql_cart_data:

@@ -105,6 +105,7 @@ public class Product {
     public void setProductSpecs(List<ProductSpec> productSpecs) {
         this.productSpecs = productSpecs;
     }
+
 }
 
 

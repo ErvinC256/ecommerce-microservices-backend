@@ -1,0 +1,12 @@
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\product-service\src\main\java\com\example\productservice\model\ProductSpec.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\product-service\src\main\java\com\example\productservice\ProductServiceApplication.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\product-service\src\main\java\com\example\productservice\model\Category.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\product-service\src\main\java\com\example\productservice\model\Subcategory.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\product-service\src\main\java\com\example\productservice\config\RabbitMQConfig.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\product-service\src\main\java\com\example\productservice\controller\ProductController.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\product-service\src\main\java\com\example\productservice\dto\ProductDto.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\product-service\src\main\java\com\example\productservice\listener\InventoryEventsListener.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\product-service\src\main\java\com\example\productservice\service\ProductService.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\product-service\src\main\java\com\example\productservice\model\Product.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\product-service\src\main\java\com\example\productservice\model\ProductTag.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\product-service\src\main\java\com\example\productservice\repository\ProductRepository.java

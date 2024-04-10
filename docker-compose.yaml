@@ -41,6 +41,15 @@ services:
       - registry-server
       - cart-mysqldb
 
+  order-service:
+    build: ./order-service
+    restart: always
+    ports:
+      - "8084:8084"
+    depends_on:
+      - registry-server
+      - order-mysqldb
+
   user-mysqldb:
     image: "mysql:8.0"
     restart: always
@@ -80,6 +89,19 @@ services:
     volumes:
       - mysql_cart_data:/var/lib/mysql
 
+  order-mysqldb:
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_DATABASE: order-service-db
+      MYSQL_USER: order-service
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql_order_data:/var/lib/mysql
+
   rabbitmq:
     image: "rabbitmq:3-management"
     restart: always
@@ -91,4 +113,5 @@ volumes:
   mysql_user_data:
   mysql_product_data:
   mysql_cart_data:
+  mysql_order_data:
 

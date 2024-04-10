@@ -1,0 +1,10 @@
+com\example\paymentservice\service\PaypalService.class
+com\example\paymentservice\config\PaypalConfig.class
+com\example\paymentservice\PaymentServiceApplication.class
+com\example\paymentservice\dto\ProcessedPaymentDto.class
+com\example\paymentservice\publisher\PaymentEventsPublisher.class
+com\example\paymentservice\controller\PaymentController.class
+com\example\paymentservice\message\CompleteOrderDetails.class
+com\example\paymentservice\dto\OrderDetailsDto.class
+com\example\paymentservice\config\RabbitMQConfig.class
+com\example\paymentservice\dto\CompletedPaymentDto.class

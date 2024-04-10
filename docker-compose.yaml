@@ -50,6 +50,23 @@ services:
       - registry-server
       - order-mysqldb
 
+  inventory-service:
+    build: ./inventory-service
+    restart: always
+    ports:
+      - "8085:8085"
+    depends_on:
+      - registry-server
+      - inventory-mysqldb
+
+  payment-service:
+    build: ./payment-service
+    restart: always
+    ports:
+      - "8086:8086"
+    depends_on:
+      - registry-server
+
   user-mysqldb:
     image: "mysql:8.0"
     restart: always
@@ -102,6 +119,19 @@ services:
     volumes:
       - mysql_order_data:/var/lib/mysql
 
+  inventory-mysqldb:
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - "3310:3306"
+    environment:
+      MYSQL_DATABASE: inventory-service-db
+      MYSQL_USER: inventory-service
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql_inventory_data:/var/lib/mysql
+
   rabbitmq:
     image: "rabbitmq:3-management"
     restart: always
@@ -114,4 +144,5 @@ volumes:
   mysql_product_data:
   mysql_cart_data:
   mysql_order_data:
+  mysql_inventory_data:
 

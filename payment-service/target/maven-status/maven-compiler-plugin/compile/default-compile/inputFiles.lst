@@ -1,0 +1,10 @@
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\payment-service\src\main\java\com\example\paymentservice\service\PaypalService.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\payment-service\src\main\java\com\example\paymentservice\dto\ProcessedPaymentDto.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\payment-service\src\main\java\com\example\paymentservice\message\CompleteOrderDetails.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\payment-service\src\main\java\com\example\paymentservice\config\RabbitMQConfig.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\payment-service\src\main\java\com\example\paymentservice\dto\CompletedPaymentDto.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\payment-service\src\main\java\com\example\paymentservice\PaymentServiceApplication.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\payment-service\src\main\java\com\example\paymentservice\controller\PaymentController.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\payment-service\src\main\java\com\example\paymentservice\dto\OrderDetailsDto.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\payment-service\src\main\java\com\example\paymentservice\publisher\PaymentEventsPublisher.java
+C:\Users\snape\Dropbox\ecommerce-fyp\ecommerce-microservices-backend\payment-service\src\main\java\com\example\paymentservice\config\PaypalConfig.java

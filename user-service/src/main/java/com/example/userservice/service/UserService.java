@@ -84,7 +84,7 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findById(id);
 
         if(!optionalUser.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found for id" + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found for id " + id);
         }
 
         User user = optionalUser.get();
@@ -96,7 +96,9 @@ public class UserService {
         if (isEmailValid(updatedEmail)) {
             user.setEmail(updatedEmail);
         } else {
+            System.out.println("Email not valid");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email not in valid format");
+
         }
         if (updatedUser.getPassword() != null) {
             if (updatedUser.getPassword().length() < 6) {

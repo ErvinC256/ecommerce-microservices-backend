@@ -112,7 +112,11 @@ public class OrderService {
     }
 
     public Long calculateUnitsPurchasedForProduct(Long productId) {
-        return orderRepository.calculateUnitsPurchasedForProduct(productId);
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        int currentMonth = currentDateTime.getMonthValue();
+        int currentYear = currentDateTime.getYear();
+
+        return orderRepository.calculateUnitsPurchased(productId, currentMonth, currentYear);
     }
 
     private List<ProductDto> fetchProductsGivenProductIds(List<Long> productIds) {

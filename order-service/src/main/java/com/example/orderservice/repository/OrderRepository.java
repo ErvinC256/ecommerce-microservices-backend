@@ -17,7 +17,11 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByStatus(@Param("userId") Long userId,
                              @Param("status") Order.Status status);
 
-    @Query("SELECT COALESCE(SUM(oi.quantityPurchased), 0) FROM Order o JOIN o.orderItems oi WHERE oi.productId = :productId")
-    Long calculateUnitsPurchasedForProduct(@Param("productId") Long productId);
+    @Query("SELECT COALESCE(SUM(oi.quantityPurchased), 0) FROM Order o JOIN o.orderItems oi WHERE oi.productId = :productId AND MONTH(o.dateCreated) = :currentMonth AND YEAR(o.dateCreated) = :currentYear")
+    Long calculateUnitsPurchased(
+            @Param("productId") Long productId,
+            @Param("currentMonth") int currentMonth,
+            @Param("currentYear") int currentYear
+    );
 
 }

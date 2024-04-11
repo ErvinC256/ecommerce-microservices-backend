@@ -91,6 +91,8 @@ public class UserService {
 
         user.setUsername(updatedUser.getUsername());
         user.setGender(updatedUser.getGender());
+        user.setBirthday(updatedUser.getBirthday());
+        user.setContact(updatedUser.getContact());
         String updatedEmail = updatedUser.getEmail();
 
         if (isEmailValid(updatedEmail)) {
@@ -107,7 +109,6 @@ public class UserService {
                 user.setPassword(updatedUser.getPassword());
             }
         }
-        user.setContact(updatedUser.getContact());
 
         userRepository.save(user);
     }

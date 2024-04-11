@@ -18,7 +18,7 @@ public class Address {
 
     private String state;
 
-    private boolean isPrimary;
+    private boolean makePrimary;
 
     @JsonIgnore
     @ManyToOne
@@ -65,12 +65,12 @@ public class Address {
         this.state = state;
     }
 
-    public boolean isPrimary() {
-        return isPrimary;
+    public boolean isMakePrimary() {
+        return makePrimary;
     }
 
-    public void setPrimary(boolean primary) {
-        isPrimary = primary;
+    public void setMakePrimary(boolean makePrimary) {
+        this.makePrimary = makePrimary;
     }
 
     public User getUser() {

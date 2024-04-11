@@ -39,7 +39,7 @@ public class AddressService {
         List<Address> addresses = new ArrayList<>();
 
         addressRepository.findAllByUserId(userId).forEach(address -> {
-            if (address.isPrimary()) {
+            if (address.isMakePrimary()) {
                 addresses.add(address);
             }
         });
@@ -51,9 +51,9 @@ public class AddressService {
 
         User user = checkIfUserExist(userId);
 
-        if (newAddress.isPrimary()) {
+        if (newAddress.isMakePrimary()) {
             user.getAddresses().forEach(address -> {
-                address.setPrimary(false);
+                address.setMakePrimary(false);
             });
         }
 
@@ -64,7 +64,7 @@ public class AddressService {
         address.setCity(newAddress.getCity());
         address.setZipcode(newAddress.getZipcode());
         address.setState(newAddress.getState());
-        address.setPrimary(newAddress.isPrimary());
+        address.setMakePrimary(newAddress.isMakePrimary());
         address.setUser(user);
 
         return addressRepository.save(address);
@@ -81,9 +81,9 @@ public class AddressService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Address not found for id " + addressId);
         }
 
-        if (updatedAddress.isPrimary()) {
+        if (updatedAddress.isMakePrimary()) {
             user.getAddresses().forEach(address -> {
-                address.setPrimary(false);
+                address.setMakePrimary(false);
             });
         }
 
@@ -94,7 +94,7 @@ public class AddressService {
         existingAddress.setCity(updatedAddress.getCity());
         existingAddress.setZipcode(updatedAddress.getZipcode());
         existingAddress.setState(updatedAddress.getState());
-        existingAddress.setPrimary(updatedAddress.isPrimary());
+        existingAddress.setMakePrimary(updatedAddress.isMakePrimary());
 
         //save the updated address
         addressRepository.save(existingAddress);

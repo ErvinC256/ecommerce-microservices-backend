@@ -47,5 +47,8 @@
      docker-compose up
      ```
 
+---
+
+- Frontend application at [https://github.com/ErvinC256/ecommerce-microservices-frontend/tree/main](https://github.com/ErvinC256/ecommerce-microservices-frontend/tree/main)
 
 

@@ -42,7 +42,10 @@
 #### Docker (for each microservice: use application-prod.properties, use MySQL syntax in data.sql, use MySQL dependency in pom.xml):
 
 1. **Rebuild Jar Files:**
-   - Before running Docker Compose, ensure that jar files for each microservice are rebuilt.
+   - Before running Docker Compose, ensure that jar files for each microservice are rebuilt. Navigate to each microservice project folder and run:
+     ```bash
+     mvn clean package
+     ```
 
 2. **Run Docker Compose:**
    - Navigate to the parent project folder.

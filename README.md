@@ -28,7 +28,7 @@
 
 ### To Run:
 
-#### Local (for each microservice: use application-dev.properties, use oracle syntax in data.sql, use oracle dependency in pom.xml):
+#### Local (for each microservice: use application-dev.properties, use Oracle syntax in data.sql, use Oracle dependency in pom.xml):
 1. **Create Schemas in Oracle Database:**
    - Create 5 schemas named `user-service`, `product-service`, `cart-service`, `order-service`, `inventory-service` within a PDB named `XEPDB1` within Oracle database, with password set to `password`.
   

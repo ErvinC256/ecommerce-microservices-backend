@@ -28,7 +28,7 @@
 
 ### 3. To Run:
 
-#### Local (for each microservice: use application-dev.properties, use Oracle syntax in data.sql, use Oracle dependency in pom.xml):
+#### Local (for each project: use application-dev.properties, use Oracle syntax in data.sql, use Oracle dependency in pom.xml):
 1. **Create Schemas in Oracle Database:**
    - Create 5 schemas named `user-service`, `product-service`, `cart-service`, `order-service`, `inventory-service` within a PDB named `XEPDB1` within Oracle database, with password set to `password`.
   
@@ -39,7 +39,7 @@
      mvn spring-boot:run
      ```
 
-#### Docker (for each microservice: use application-prod.properties, use MySQL syntax in data.sql, use MySQL dependency in pom.xml):
+#### Docker (for each project: use application-prod.properties, use MySQL syntax in data.sql, use MySQL dependency in pom.xml):
 
 1. **Rebuild Jar Files:**
    - Before running Docker Compose, ensure that jar files for each microservice are rebuilt. Navigate to each microservice project folder and run:

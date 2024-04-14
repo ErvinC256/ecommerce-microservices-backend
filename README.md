@@ -13,15 +13,23 @@
 - Order Handling
 - Inventory Management
 
+---
+
 ### Prerequisites:
+
 #### Local:
 - [Oracle](https://www.oracle.com/my/database/technologies/xe-downloads.html) installed
 - [RabbitMQ](https://www.rabbitmq.com/docs/download) installed
 
+---
+
 #### Docker:
 - [Docker](https://www.docker.com/products/docker-desktop/) installed
 
+---
+
 ### To Run:
+
 #### Local:
 1. **Create Schemas in Oracle Database:**
    - Create 5 schemas named `user-service`, `product-service`, `cart-service`, `order-service`, `inventory-service` within a PDB named `XEPDB1` within Oracle database, with password set to `password`.
@@ -32,6 +40,8 @@
      ```bash
      mvn spring-boot:run
      ```
+
+---
 
 #### Docker:
 1. **Run Docker Compose:**

@@ -1,19 +1,37 @@
 # ecommerce-microservices-backend
 
----
-
 <img src="https://github.com/ErvinC256/ecommerce-microservices-backend/assets/149756489/31b77ae6-bcc7-497c-a0fd-a765616cb05a" width="75%">
 <br><br>
 <img src="https://github.com/ErvinC256/ecommerce-microservices-backend/assets/149756489/599da99d-fd54-48f1-8de6-e288bea2a357" width="75%">
 <br><br>
 <img src="https://github.com/ErvinC256/ecommerce-microservices-backend/assets/149756489/8538cc3e-0fa4-4bf3-a382-d4cd957e2cd0" width="75%">
 
----
-
 ### Main Features:
-1. Enhanced Product Search
-2. Order Placement & Payment
-3. Account Management
-4. Order Handling
-5. Inventory Management
+- Enhanced Product Search
+- Order Placement & Payment
+- Account Management
+- Order Handling
+- Inventory Management
+
+### Prerequisites (Local):
+- [Oracle](https://www.oracle.com/my/database/technologies/xe-downloads.html) installed
+- [RabbitMQ](https://www.rabbitmq.com/docs/download) installed
+
+### Prerequisites (Docker):
+- [Docker](https://www.docker.com/products/docker-desktop/) installed
+
+### To Run (Local):
+1. Create 5 schemas named `user-service`, `product-service`, `cart-service`, `order-service`, `inventory-service` within a PDB named `XEPDB1` within Oracle database, with password set to `password`.
+2. Run each microservice project using Maven:
+    ```bash
+    mvn spring-boot:run
+    ```
+
+### To Run (Docker):
+1. Navigate to the parent project folder.
+2. Run Docker Compose:
+    ```bash
+    docker-compose up
+    ```
+
 

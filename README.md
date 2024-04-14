@@ -13,25 +13,33 @@
 - Order Handling
 - Inventory Management
 
-### Prerequisites (Local):
+### Prerequisites:
+#### Local:
 - [Oracle](https://www.oracle.com/my/database/technologies/xe-downloads.html) installed
 - [RabbitMQ](https://www.rabbitmq.com/docs/download) installed
 
-### Prerequisites (Docker):
+#### Docker:
 - [Docker](https://www.docker.com/products/docker-desktop/) installed
 
-### To Run (Local):
-1. Create 5 schemas named `user-service`, `product-service`, `cart-service`, `order-service`, `inventory-service` within a PDB named `XEPDB1` within Oracle database, with password set to `password`.
-2. Run each microservice project using Maven:
-    ```bash
-    mvn spring-boot:run
-    ```
+### To Run:
+#### Local:
+1. **Create Schemas in Oracle Database:**
+   - Create 5 schemas named `user-service`, `product-service`, `cart-service`, `order-service`, `inventory-service` within a PDB named `XEPDB1` within Oracle database, with password set to `password`.
+  
+2. **Run Microservices Using Maven:**
+   - Navigate to each microservice project folder.
+   - Run each microservice project using Maven:
+     ```bash
+     mvn spring-boot:run
+     ```
 
-### To Run (Docker):
-1. Navigate to the parent project folder.
-2. Run Docker Compose:
-    ```bash
-    docker-compose up
-    ```
+#### Docker:
+1. **Run Docker Compose:**
+   - Navigate to the parent project folder.
+   - Run Docker Compose:
+     ```bash
+     docker-compose up
+     ```
+
 
 

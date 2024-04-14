@@ -21,8 +21,6 @@
 - [Oracle](https://www.oracle.com/my/database/technologies/xe-downloads.html) installed
 - [RabbitMQ](https://www.rabbitmq.com/docs/download) installed
 
----
-
 #### Docker:
 - [Docker](https://www.docker.com/products/docker-desktop/) installed
 
@@ -40,8 +38,6 @@
      ```bash
      mvn spring-boot:run
      ```
-
----
 
 #### Docker:
 1. **Run Docker Compose:**

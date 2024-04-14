@@ -6,7 +6,7 @@
 <br><br>
 <img src="https://github.com/ErvinC256/ecommerce-microservices-backend/assets/149756489/8538cc3e-0fa4-4bf3-a382-d4cd957e2cd0" width="75%">
 
-### Main Features:
+### 1. Main Features:
 - Enhanced Product Search
 - Order Placement & Payment
 - Account Management
@@ -15,7 +15,7 @@
 
 ---
 
-### Prerequisites:
+### 2. Prerequisites:
 
 #### Local:
 - [Oracle](https://www.oracle.com/my/database/technologies/xe-downloads.html) installed
@@ -26,7 +26,7 @@
 
 ---
 
-### To Run:
+### 3. To Run:
 
 #### Local (for each microservice: use application-dev.properties, use Oracle syntax in data.sql, use Oracle dependency in pom.xml):
 1. **Create Schemas in Oracle Database:**

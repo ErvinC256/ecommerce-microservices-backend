@@ -39,14 +39,18 @@
      mvn spring-boot:run
      ```
 
-#### Docker (for each microservice: use application-prod.properties, use mysql syntax in data.sql, use mysql dependency in pom.xml) :
-1. **Run Docker Compose:**
+#### Docker (for each microservice: use application-prod.properties, use MySQL syntax in data.sql, use MySQL dependency in pom.xml):
+
+1. **Rebuild Jar Files:**
+   - Before running Docker Compose, ensure that jar files for each microservice are rebuilt.
+
+2. **Run Docker Compose:**
    - Navigate to the parent project folder.
    - Run Docker Compose:
      ```bash
      docker-compose up
      ```
-
+     
 ---
 
 - Frontend application at [https://github.com/ErvinC256/ecommerce-microservices-frontend/tree/main](https://github.com/ErvinC256/ecommerce-microservices-frontend/tree/main)

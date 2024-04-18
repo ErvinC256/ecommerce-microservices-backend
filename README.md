@@ -59,7 +59,7 @@
 
 ### 4. References:
 
-1. PayPal Integration
+- PayPal Integration
    - [https://developer.paypal.com/docs/checkout/standard/integrate/](https://developer.paypal.com/docs/checkout/standard/integrate/)
 
 ---

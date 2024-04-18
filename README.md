@@ -57,6 +57,12 @@
      
 ---
 
+### 4. References:
+
+1. [https://developer.paypal.com/docs/checkout/standard/integrate/](https://developer.paypal.com/docs/checkout/standard/integrate/)
+
+--
+
 - Frontend application at [https://github.com/ErvinC256/ecommerce-microservices-frontend/tree/main](https://github.com/ErvinC256/ecommerce-microservices-frontend/tree/main)
 
 

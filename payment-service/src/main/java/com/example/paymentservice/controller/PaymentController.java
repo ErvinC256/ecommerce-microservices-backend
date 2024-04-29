@@ -25,6 +25,9 @@ public class PaymentController {
     public ResponseEntity<ProcessedPaymentDto> createPayment(@RequestParam BigDecimal amount) {
 
         ProcessedPaymentDto processedPaymentDto = paypalService.createPayment(amount);
+        System.out.println(processedPaymentDto.getPaypalOrderId());
+        System.out.println(processedPaymentDto.getPaypalStatus());
+        System.out.println(processedPaymentDto.getRedirectUrl());
         return new ResponseEntity<>(processedPaymentDto, HttpStatus.CREATED);
     }
 

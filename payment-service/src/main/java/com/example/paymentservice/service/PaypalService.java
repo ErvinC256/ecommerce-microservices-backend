@@ -27,7 +27,6 @@ public class    PaypalService {
 
     public ProcessedPaymentDto createPayment(BigDecimal amount) {
 
-        System.out.println("inside createPayment");
         OrderRequest orderRequest = new OrderRequest();
         orderRequest.checkoutPaymentIntent("CAPTURE");
         AmountWithBreakdown amountBreakdown = new AmountWithBreakdown().currencyCode("MYR").value(amount.toString());

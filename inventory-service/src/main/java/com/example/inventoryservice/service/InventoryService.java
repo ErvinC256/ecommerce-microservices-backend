@@ -1,8 +1,9 @@
 package com.example.inventoryservice.service;
 
+import com.example.inventoryservice.config.RabbitMQConfig;
 import com.example.inventoryservice.model.Inventory;
-import com.example.inventoryservice.publisher.InventoryEventsPublisher;
 import com.example.inventoryservice.repository.InventoryRepository;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,11 +15,11 @@ import java.util.*;
 public class InventoryService {
 
     private final InventoryRepository inventoryRepository;
-    private final InventoryEventsPublisher inventoryEventsPublisher;
+    private final RabbitTemplate rabbitTemplate;
 
-    public InventoryService(InventoryRepository inventoryRepository, InventoryEventsPublisher inventoryEventsPublisher) {
+    public InventoryService(InventoryRepository inventoryRepository, RabbitTemplate rabbitTemplate, RabbitTemplate rabbitTemplate1) {
         this.inventoryRepository = inventoryRepository;
-        this.inventoryEventsPublisher = inventoryEventsPublisher;
+        this.rabbitTemplate = rabbitTemplate1;
     }
 
     public void updateInventory(Long id, Long stockIncrementOrDecrement) {
@@ -43,7 +44,7 @@ public class InventoryService {
         Map<Long, Long> productQuantities = new HashMap<>();
         productQuantities.put(id, stockIncrementOrDecrement);
 
-        inventoryEventsPublisher.publishInventoryUpdatedEvent(productQuantities);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.INVENTORY_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_SYNC_STOCK, productQuantities);
     }
 }
 

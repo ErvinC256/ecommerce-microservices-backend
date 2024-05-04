@@ -2,7 +2,7 @@ package com.example.paymentservice.publisher;
 
 import com.example.paymentservice.config.RabbitMQConfig;
 import com.example.paymentservice.dto.OrderDetailsDto;
-import com.example.paymentservice.message.CompleteOrderDetails;
+import com.example.paymentservice.message.PlaceOrderDetails;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +17,13 @@ public class PaymentEventsPublisher {
 
     public void publishPaymentCompletedEvent(String paypalOrderId, OrderDetailsDto orderDetailsDto) {
 
-        CompleteOrderDetails completeOrderDetails = new CompleteOrderDetails();
-        completeOrderDetails.setOrderId(orderDetailsDto.getOrderId());
-        completeOrderDetails.setUserId(orderDetailsDto.getUserId());
-        completeOrderDetails.setCartItemIds(orderDetailsDto.getCartItemIds());
-        completeOrderDetails.setPaymentNumber(paypalOrderId);
+        PlaceOrderDetails placeOrderDetails = new PlaceOrderDetails();
+        placeOrderDetails.setOrderId(orderDetailsDto.getOrderId());
+        placeOrderDetails.setUserId(orderDetailsDto.getUserId());
+        placeOrderDetails.setCartItemIds(orderDetailsDto.getCartItemIds());
+        placeOrderDetails.setPaymentNumber(paypalOrderId);
+        placeOrderDetails.setProductQuantityMap(orderDetailsDto.getProductQuantityMap());
 
-        rabbitTemplate.convertAndSend(RabbitMQConfig.PAYMENT_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_CREATE_ORDER, completeOrderDetails);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.PAYMENT_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_REMOVE_CART_ITEMS, placeOrderDetails);
     }
 }

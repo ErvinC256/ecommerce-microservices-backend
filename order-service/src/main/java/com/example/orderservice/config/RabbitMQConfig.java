@@ -10,15 +10,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    //with payment service (acting as listener)
-    public static final String PAYMENT_SERVICE_EXCHANGE = "x.payment-service-exchange";
-    public static final String CREATE_ORDER_QUEUE = "q.create-order";
-    public static final String ROUTING_KEY_CREATE_ORDER = "create-order";
-
-    //with cart service and inventory service (acting as publisher)
-    public static final String ORDER_SERVICE_EXCHANGE = "x.order-service-exchange";
-    public static final String ROUTING_KEY_REMOVE_CART_ITEMS = "remove-cart-items";
-    public static final String ROUTING_KEY_REDUCE_INVENTORY_STOCK = "reduce-inventory-stock";
+    //with inventory service (acting as listener)
+    public static final String INVENTORY_SERVICE_EXCHANGE = "x.inventory-service-exchange";
+    public static final String PLACE_ORDER_QUEUE = "q.place-order";
+    public static final String ROUTING_KEY_PLACE_ORDER = "place-order";
 
     private final CachingConnectionFactory cachingConnectionFactory;
 
@@ -26,21 +21,15 @@ public class RabbitMQConfig {
         this.cachingConnectionFactory = cachingConnectionFactory;
     }
 
-    //with payment service
+    //with inventory service
     @Bean
-    public Queue createOrderQueue() {
-        return new Queue(CREATE_ORDER_QUEUE);
+    public Queue placeOrderQueue() {
+        return new Queue(PLACE_ORDER_QUEUE);
     }
 
     @Bean
-    public Binding createOrderQueueBinding() {
-        return BindingBuilder.bind(createOrderQueue()).to(new DirectExchange(PAYMENT_SERVICE_EXCHANGE)).with(ROUTING_KEY_CREATE_ORDER);
-    }
-
-    //with cart service and inventory service
-    @Bean
-    public DirectExchange orderServiceExchange() {
-        return new DirectExchange(ORDER_SERVICE_EXCHANGE);
+    public Binding placeOrderQueueBinding() {
+        return BindingBuilder.bind(placeOrderQueue()).to(new DirectExchange(INVENTORY_SERVICE_EXCHANGE)).with(ROUTING_KEY_PLACE_ORDER);
     }
 
     @Bean

@@ -97,7 +97,7 @@ public class OrderService {
         Map<Long, Long> productQuantityMap = initOrderDetailsDto.getProductQuantityMap();
         productQuantityMap.keySet().forEach(key -> {
             OrderItem orderItem = new OrderItem();
-            orderItem.setQuantityPurchased(productQuantityMap.get(key));
+            orderItem.setQuantityPurchased(-productQuantityMap.get(key)); // minus sign
             orderItem.setProductId(key);
             orderItem.setOrder(order);
 

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class    PaypalService {
+public class PaypalService {
 
     private final PayPalHttpClient payPalHttpClient;
     private final PaymentEventsPublisher paymentEventsPublisher;

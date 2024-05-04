@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     public static final String INVENTORY_SERVICE_EXCHANGE = "x.inventory-service-exchange";
-    public static final String UPDATE_STOCK_QUEUE = "q.update-stock";
-    public static final String ROUTING_KEY_UPDATE_STOCK = "update-stock";
+    public static final String SYNC_STOCK_QUEUE = "q.sync-stock";
+    public static final String ROUTING_KEY_SYNC_STOCK = "sync-stock";
 
     private final CachingConnectionFactory cachingConnectionFactory;
 
@@ -21,13 +21,13 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Queue updateStockQueue() {
-        return new Queue(UPDATE_STOCK_QUEUE);
+    public Queue syncStockQueue() {
+        return new Queue(SYNC_STOCK_QUEUE);
     }
 
     @Bean
-    public Binding updateStockQueueBinding() {
-        return BindingBuilder.bind(updateStockQueue()).to(new DirectExchange(INVENTORY_SERVICE_EXCHANGE)).with(ROUTING_KEY_UPDATE_STOCK);
+    public Binding syncStockQueueBinding() {
+        return BindingBuilder.bind(syncStockQueue()).to(new DirectExchange(INVENTORY_SERVICE_EXCHANGE)).with(ROUTING_KEY_SYNC_STOCK);
     }
 
     @Bean

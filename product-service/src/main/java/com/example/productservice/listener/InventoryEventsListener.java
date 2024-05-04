@@ -21,7 +21,7 @@ public class InventoryEventsListener {
     }
 
     @Transactional
-    @RabbitListener(queues = RabbitMQConfig.UPDATE_STOCK_QUEUE)
+    @RabbitListener(queues = RabbitMQConfig.SYNC_STOCK_QUEUE)
     public void handleInventoryUpdatedEvent(Map<Long, Long> productQuantityMap) {
 
         productQuantityMap.keySet().forEach(key -> {
@@ -31,7 +31,7 @@ public class InventoryEventsListener {
                 throw new IllegalArgumentException("");
             }
 
-            Product product =productOptional.get();
+            Product product = productOptional.get();
 
             Long quantityLeft = product.getQuantityInStock();
             quantityLeft += productQuantityMap.get(key); // minus sign in value

@@ -10,8 +10,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
+    //with cart service (acting as publisher)
     public static final String PAYMENT_SERVICE_EXCHANGE = "x.payment-service-exchange";
-    public static final String ROUTING_KEY_CREATE_ORDER = "create-order";
+    public static final String ROUTING_KEY_REMOVE_CART_ITEMS = "remove-cart-items";
 
     private final CachingConnectionFactory cachingConnectionFactory;
 

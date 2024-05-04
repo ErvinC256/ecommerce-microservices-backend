@@ -2,15 +2,18 @@ package com.example.paymentservice.message;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-//payment to order
-public class CompleteOrderDetails implements Serializable {
+//involved in payment, cart, inventory, order
+public class PlaceOrderDetails implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long orderId;
     private String paymentNumber;
     private Long userId;
     private List<Long> cartItemIds = new ArrayList<>();
+    private Map<Long, Long> productQuantityMap = new HashMap<>();
 
     public Long getOrderId() {
         return orderId;
@@ -42,5 +45,13 @@ public class CompleteOrderDetails implements Serializable {
 
     public void setCartItemIds(List<Long> cartItemIds) {
         this.cartItemIds = cartItemIds;
+    }
+
+    public Map<Long, Long> getProductQuantityMap() {
+        return productQuantityMap;
+    }
+
+    public void setProductQuantityMap(Map<Long, Long> productQuantityMap) {
+        this.productQuantityMap = productQuantityMap;
     }
 }

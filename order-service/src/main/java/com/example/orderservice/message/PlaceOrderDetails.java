@@ -1,4 +1,4 @@
-package com.example.paymentservice.dto;
+package com.example.orderservice.message;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,10 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//frontend to payment
-public class OrderDetailsDto implements Serializable {
-
+//involved in payment, cart, inventory, order
+public class PlaceOrderDetails implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Long orderId;
+    private String paymentNumber;
     private Long userId;
     private List<Long> cartItemIds = new ArrayList<>();
     private Map<Long, Long> productQuantityMap = new HashMap<>();
@@ -20,6 +21,14 @@ public class OrderDetailsDto implements Serializable {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
+    }
+
+    public String getPaymentNumber() {
+        return paymentNumber;
+    }
+
+    public void setPaymentNumber(String paymentNumber) {
+        this.paymentNumber = paymentNumber;
     }
 
     public Long getUserId() {

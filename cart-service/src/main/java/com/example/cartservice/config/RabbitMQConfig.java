@@ -10,18 +10,21 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    //with user service
+    //with user service (acting as listener)
     public static final String USER_SERVICE_EXCHANGE = "x.user-service-exchange";
     public static final String CREATE_CART_QUEUE = "q.create-cart";
     public static final String DELETE_CART_QUEUE = "q.delete-cart";
     public static final String ROUTING_KEY_CREATE_CART = "create-cart";
     public static final String ROUTING_KEY_DELETE_CART = "delete-cart";
 
-    //with order service
-    public static final String ORDER_SERVICE_EXCHANGE = "x.order-service-exchange";
-    public static final String REMOVE_QUEUE = "q.create-cart";
+    //with payment service (acting as listener)
+    public static final String PAYMENT_SERVICE_EXCHANGE = "x.payment-service-exchange";
     public static final String REMOVE_CART_ITEMS_QUEUE = "q.remove-cart-items";
     public static final String ROUTING_KEY_REMOVE_CART_ITEMS = "remove-cart-items";
+
+    //with inventory service (acting as publisher)
+    public static final String CART_SERVICE_EXCHANGE = "x.cart-service-exchange";
+    public static final String ROUTING_KEY_REDUCE_INVENTORY_STOCK = "reduce-inventory-stock";
 
     private final CachingConnectionFactory cachingConnectionFactory;
 
@@ -50,7 +53,7 @@ public class RabbitMQConfig {
         return BindingBuilder.bind(deleteCartQueue()).to(new DirectExchange(USER_SERVICE_EXCHANGE)).with(ROUTING_KEY_DELETE_CART);
     }
 
-    //with order service
+    //with payment service
     @Bean
     public Queue removeCartItemsQueue() {
         return new Queue(REMOVE_CART_ITEMS_QUEUE);
@@ -58,7 +61,13 @@ public class RabbitMQConfig {
 
     @Bean
     public Binding removeCartItemsQueueBinding() {
-        return BindingBuilder.bind(removeCartItemsQueue()).to(new DirectExchange(ORDER_SERVICE_EXCHANGE)).with(ROUTING_KEY_REMOVE_CART_ITEMS);
+        return BindingBuilder.bind(removeCartItemsQueue()).to(new DirectExchange(PAYMENT_SERVICE_EXCHANGE)).with(ROUTING_KEY_REMOVE_CART_ITEMS);
+    }
+
+    //with inventory service
+    @Bean
+    public DirectExchange cartServiceExchange() {
+        return new DirectExchange(CART_SERVICE_EXCHANGE);
     }
 
     @Bean

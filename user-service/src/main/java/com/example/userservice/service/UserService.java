@@ -1,9 +1,9 @@
 package com.example.userservice.service;
 
+import com.example.userservice.config.RabbitMQConfig;
 import com.example.userservice.dto.RegisterDto;
 import com.example.userservice.dto.AuthenticateDto;
 import com.example.userservice.model.User;
-import com.example.userservice.publisher.UserEventsPublisher;
 import com.example.userservice.repository.UserRepository;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.HttpStatus;
@@ -19,12 +19,10 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RabbitTemplate rabbitTemplate;
-    private final UserEventsPublisher userEventsPublisher;
 
-    public UserService(UserRepository userRepository, RabbitTemplate rabbitTemplate, UserEventsPublisher userEventsPublisher) {
+    public UserService(UserRepository userRepository, RabbitTemplate rabbitTemplate) {
         this.userRepository = userRepository;
         this.rabbitTemplate = rabbitTemplate;
-        this.userEventsPublisher = userEventsPublisher;
     }
 
     public User getUser(Long id) {
@@ -61,7 +59,7 @@ public class UserService {
         user =  userRepository.save(user);
 
         //publish event
-        userEventsPublisher.publishUserCreatedEvent(user.getId());
+        rabbitTemplate.convertAndSend(RabbitMQConfig.USER_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_CREATE_CART, user.getId());
 
         return user;
     }
@@ -122,7 +120,7 @@ public class UserService {
         }
 
         //publish event
-        userEventsPublisher.publishUserDeletedEvent(id);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.USER_SERVICE_EXCHANGE, RabbitMQConfig.ROUTING_KEY_DELETE_CART, id);
     }
 
     //helper methods

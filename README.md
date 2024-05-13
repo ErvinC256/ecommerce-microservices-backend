@@ -5,7 +5,7 @@
 <br><br>
 <img src="https://github.com/ErvinC256/ecommerce-microservices-backend/assets/149756489/599da99d-fd54-48f1-8de6-e288bea2a357" width="75%">
 <br><br>
-<img src="https://github.com/ErvinC256/ecommerce-microservices-backend/assets/149756489/8538cc3e-0fa4-4bf3-a382-d4cd957e2cd0" width="75%">
+<img src="https://github.com/ErvinC256/ecommerce-microservices-backend/assets/149756489/b8712077-216a-4478-b507-06f5b194b331" width="75%">
 
 ### 1. Main Features
 - Enhanced Product Search

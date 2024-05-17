@@ -2,7 +2,6 @@ package com.example.cartservice.controller;
 
 import com.example.cartservice.dto.CartDto;
 import com.example.cartservice.dto.CartItemDto;
-import com.example.cartservice.model.CartItem;
 import com.example.cartservice.service.CartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
